@@ -5,7 +5,7 @@
 <html lang="en">
 
 <head>
-  <!-- Seperate blocks were created so that I can extend this template later on and replace segments of it as needed. -->
+  <!-- Separate blocks were created so that I can extend this template later on and replace segments of it as needed. -->
   {% block meta %}
     <!-- This next meta tag will allow support of older Internet Explorer versions and eliminate validation errors when validating our HTML. -->
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -13,7 +13,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Farm Fresh fruit and vegetables online and delivered in Zürich, Switzerland">
     <meta name="keywords" content="farm fresh produce, fruit delivery Zürich, food market Zürich, farm fresh online, farm fresh delivery near me
-                                   buy fruit online, buy vegetables online, online superemarket Zürich, organic fruit, organic vegetables, organic sauces,
+                                   buy fruit online, buy vegetables online, online supermarket Zürich, organic fruit, organic vegetables, organic sauces,
                                    seasonal fruit, seasonal vegetables">
   {% endblock %}
 
@@ -61,7 +61,7 @@
   {% endblock %}
 
   <!--  This extra title block will allow us to add an extra text to the page title when needed. -->
-  <title>Farm Fresh - Fruit and Vegetable delivery in Zürich </title>
+  <title>Farm Fresh - Fruit and Vegetable delivery in Zürich {% block extra_title %}{% endblock %}</title>
 </head>
 
 <body>
@@ -71,7 +71,7 @@
 
       <!-- Farm Fresh Logo -->
       <div class="col-12 col-lg-4 my-auto py-1 py-lg-0 text-center text-lg-left">
-        <a href="#" class="nav-link main-logo-link" aria-label="Link to home page">
+        <a href="{% url 'home' %}" class="nav-link main-logo-link" aria-label="Link to home page">
           <h2 class="logo-font text-green my-0"><strong>Farm</strong> Fresh</h2>
         </a>
       </div>
@@ -110,6 +110,8 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         
+        <!-- main navigation menu -->
+        {% include 'includes/main-nav.html' %}
       </nav>
     </div>
 
