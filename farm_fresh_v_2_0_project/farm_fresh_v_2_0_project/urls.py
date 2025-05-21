@@ -21,7 +21,10 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('farm_fresh_app.urls'))
+    # Farm Fresh Home App URLs
+    path('', include('farm_fresh_app.urls')),
+    # Allauth URLs
+    path('accounts/', include('allauth.urls')),
 ]
 
 if settings.DEBUG:
