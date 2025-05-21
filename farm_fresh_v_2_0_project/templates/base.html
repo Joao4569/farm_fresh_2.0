@@ -93,7 +93,26 @@
             </a>
             <div class="dropdown-menu border-0" aria-labelledby="user-options">
 
-              
+              <!-- Check if the user is authenticated(registered and logged in) -->
+              {% if request.user.is_authenticated %}
+              <!-- Check if the user is a superuser(manangement/owner or associated employee) -->
+                {% if request.user.is_superuser %}
+                  <!-- Product management link -->
+                  <a href="#" class="dropdown-item" aria-label="Link for product management">Product Management</a>
+                {% endif %}
+                <!-- Link to user account/profile -->
+                <a href="#" class="dropdown-item" aria-label="Link to view your profile">My Profile</a>
+                <!-- Link to logout page -->
+                <a href="{% url 'account_logout' %}" class="dropdown-item" aria-label="Link to logout of user account">Logout</a>
+
+              <!-- If the user is not authenticated(registered and logged in) -->
+              {% else %}
+                <!-- link to registration page -->
+                <a href="{% url 'account_signup' %}" class="dropdown-item" aria-label="Link to register as a new user">Register</a>
+                <!-- Link to login page -->
+                <a href="{% url 'account_login' %}" class="dropdown-item" aria-label="Link to log into user account">Login</a>
+              {% endif %}
+
             </div>
           </li>
 
