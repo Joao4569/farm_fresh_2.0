@@ -12,6 +12,11 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 import os
 from pathlib import Path
 
+# DEPLOYMENT
+# import dj_database_url
+# if os.path.isfile('env.py'):
+#     import env
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -128,7 +133,19 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
+"""This will tell Django where all of our static files are located."""
+
 STATIC_URL = 'static/'
+
+""" This is the location where static files will be collected to
+when you run `collectstatic` """
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
+
+# This will tell Django where all of our media files are located.
+
+MEDIA_URL = '/media/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field

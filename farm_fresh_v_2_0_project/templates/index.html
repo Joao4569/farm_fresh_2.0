@@ -1,11 +1,169 @@
-<!DOCTYPE html>
+<!-- For loading static files -->
+{% load static %}
+
+<!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
-    <h1>Testing Complete!!!</h1>
-  </body>
+
+<head>
+  <!-- Seperate blocks were created so that I can extend this template later on and replace segments of it as needed. -->
+  {% block meta %}
+    <!-- This next meta tag will allow support of older Internet Explorer versions and eliminate validation errors when validating our HTML. -->
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Farm Fresh fruit and vegetables online and delivered in Zürich, Switzerland">
+    <meta name="keywords" content="farm fresh produce, fruit delivery Zürich, food market Zürich, farm fresh online, farm fresh delivery near me
+                                   buy fruit online, buy vegetables online, online superemarket Zürich, organic fruit, organic vegetables, organic sauces,
+                                   seasonal fruit, seasonal vegetables">
+  {% endblock %}
+
+  <!-- This block will contain any additional meta tags required for this application -->
+  {% block extra_meta %}
+  {% endblock %}
+
+  <!-- This block contains the tag for the required CSS of Bootstrap and our custom CSS -->
+  {% block corecss %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+  {% endblock %}
+
+  <!-- This block will contain any additional CSS required for this application -->
+  {% block extra_css %}
+  {% endblock %}
+
+  <!-- This block contains all the tags required for Bootstrap, Jquery, Mailchimp, stripe as well as the
+  script tag required for the font awesome kit -->
+  {% block corejs %}
+    <script src="https://kit.fontawesome.com/e26a309e14.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"
+      integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+    </script>
+
+  {% endblock %}
+
+  <!-- This block will add any extra JavaScript required for this application. -->
+  {% block extra_js %}
+  {% endblock %}
+
+  <!--  This extra title block will allow us to add an extra text to the page title when needed. -->
+  <title>Farm Fresh - Fruit and Vegetable delivery in Zürich </title>
+</head>
+
+<body>
+  <!-- Header has classes of container-fluid and fixed-top to ensure that it sticks to the top of the page -->
+  <header class="container-fluid fixed-top">
+    <div id="topnav" class="row bg-beige pt-lg-2 d-none d-lg-flex">
+
+      <!-- Farm Fresh Logo -->
+      <div class="col-12 col-lg-4 my-auto py-1 py-lg-0 text-center text-lg-left">
+        <a href="#" class="nav-link main-logo-link" aria-label="Link to home page">
+          <h2 class="logo-font text-green my-0"><strong>Farm</strong> Fresh</h2>
+        </a>
+      </div>
+
+      <!-- Search form -->
+      <div class="col-12 col-lg-4 my-auto py-1 py-lg-0">
+      </div>
+      <div class="col-12 col-lg-4 my-auto py-1 py-lg-0">
+        <ul class="list-inline list-unstyled text-center text-lg-right my-0">
+
+          <!-- Link to user account/product management/logout/login and for user registration -->
+          <li class="list-inline-item dropdown">
+            <a class="text-white nav-link" href="#" id="user-options" data-toggle="dropdown" aria-haspopup="true"
+              aria-expanded="false" aria-label="User account graphic and text as a link">
+              <div class="text-center">
+                <div><i class="fas fa-user fa-lg text-green"></i></div>
+                <p class="my-0 text-green">My Account</p>
+              </div>
+            </a>
+            <div class="dropdown-menu border-0" aria-labelledby="user-options">
+
+              
+            </div>
+          </li>
+
+          <!-- Link to shopping cart -->
+          
+        </ul>
+      </div>
+    </div>
+
+    <!-- main navbars -->
+    <div class="row bg-beige">
+      <nav class="navbar navbar-expand-lg navbar-light w-100">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-nav" aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        
+      </nav>
+    </div>
+
+    <!-- delivery banner -->
+    <div id="delivery-banner" class="row text-center">
+      <div class="col bg-orange text-white">
+        <h4 class="my-1">Zürich Delivery only, Free delivery over CHF <!--{{ free_delivery_threshold }}-->!</h4>            
+      </div>            
+    </div>
+  </header>
+
+  
+
+  <!-- This page header block will act as an additional header added to the top of pages but underneath the main header. -->
+  {% block page_header %}
+  {% endblock %}
+
+  <!-- This is where pages that extend the base template will add their main content -->
+  {% block content %}
+  {% endblock %}
+
+  <!-- Footer -->
+  <footer class="container-fluid fixed-bottom">
+    <div class="row footer bg-orange">
+
+      <div class="col-12 col-md-4 text-center text-white d-flex justify-content-center">
+        <a href="https://www.swiss-farmers.ch/seasonal-calendar/seasonal-calendar-fruits/" target="_blank"
+          aria-label="Visit Swiss seasonal fruit calender page (opens in a new tab)">
+          <p class="text-white my-auto">Swiss farmers - Seasonal Fruit calender</p>
+        </a>
+      </div>
+
+      <div class="col-12 col-md-4 text-center d-flex justify-content-center my-auto social-link-container">
+        <a href="https://facebook.com" target="_blank" rel="noopener"
+        aria-label="Visit our Facebook page (opens in a new tab)">
+          <i class="fa-brands fa-facebook text-white social-links"></i>
+        </a>
+      <a href="https://instagram.com" target="_blank" rel="noopener"
+        aria-label="Visit our Instagram page (opens in a new tab)">
+          <i class="fa-brands fa-instagram-square text-white social-links"></i>
+        </a>
+      <a href="https://twitter.com" target="_blank" rel="noopener"
+        aria-label="Visit our Twitter page (opens in a new tab)">
+          <i class="fa-brands fa-twitter-square text-white social-links"></i>
+        </a>
+      </div>
+
+      <div class="col-12 col-md-4 text-center d-flex justify-content-center">
+        <p class="text-white">@2022 - FarmFresh</p>
+        <a href="https://www.privacypolicygenerator.info/live.php?token=V8vva0hjL6kI1ZNUnj0iZJWME7JS0xCh" target="_blank"
+          aria-label="Farm Fresh privacy policy (opens on a new page)">
+          <p class="text-white my-auto pl-4">Privacy Policy</p>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- This block will add JavaScript needed in order to display toasts -->
+  {% block postloadjs %}
+  
+  {% endblock %}
+
+
+</body>
+
 </html>
