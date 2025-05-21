@@ -10,9 +10,11 @@
         </title>
         {% block extra_head %}
         {% endblock extra_head %}
+        <link rel="stylesheet" href="../../../static/css/base.css">
     </head>
     <body>
-        {% block body %}
+        <div id="allauth-bg">
+            {% block body %}
             {% if messages %}
                 <div>
                     <strong>{% trans "Messages:" %}</strong>
@@ -82,5 +84,6 @@
         {% endblock body %}
         {% block extra_body %}
         {% endblock extra_body %}
+        </div>
     </body>
 </html>
