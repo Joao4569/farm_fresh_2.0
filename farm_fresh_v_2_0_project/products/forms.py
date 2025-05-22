@@ -1,12 +1,17 @@
+""" This module contains the ProductForm class for creating and
+ updating products. """
 from django import forms
 from .widgets import CustomClearableFileInput
 from .models import Product, Category
-# taken directly from Boutique Ado and customised for Farm Fresh
 
 
 class ProductForm(forms.ModelForm):
+    """" This class will create a form for the Product model and
+    all of its fields."""
 
     class Meta:
+        """ This class edits the default meta class to include the
+        Product model and all of its fields """
         model = Product
         fields = '__all__'
 

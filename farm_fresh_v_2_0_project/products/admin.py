@@ -1,3 +1,4 @@
+"""  This file contains the setup for the admin site for the products app. """
 from django.contrib import admin
 from .models import Product, Category, Producer, Packaging
 

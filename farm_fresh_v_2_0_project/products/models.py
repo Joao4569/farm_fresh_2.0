@@ -1,3 +1,5 @@
+""" This file contains the ProductForm class for creating
+and updating products. """
 from django.db import models
 
 
@@ -15,7 +17,7 @@ class Category(models.Model):
     friendly_name = models.CharField(max_length=254, null=True, blank=True)
 
     def __str__(self):
-        """This string model method will take the categoy object itself
+        """This string model method will take the category object itself
         and return its name"""
 
         return self.name
