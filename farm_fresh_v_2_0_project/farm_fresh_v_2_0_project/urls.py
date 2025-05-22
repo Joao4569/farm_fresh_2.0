@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from .views import handler404
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -31,7 +32,13 @@ urlpatterns = [
     path('cart/', include('cart.urls')),
     # Path to Checkout app URL's
     path('checkout/', include('checkout.urls')),
+    # Path to User profile app URL's
+    path('profile/',
+         include('user_profiles.urls')),
 ]
+
+# Path to 404 handler
+handler404 = 'farm_fresh_v_2_0_project.views.handler404'
 
 if settings.DEBUG:
     urlpatterns += static(

@@ -14,8 +14,8 @@ from pathlib import Path
 
 # DEPLOYMENT
 # import dj_database_url
-# if os.path.isfile('env.py'):
-#     import env
+if os.path.isfile('env.py'):
+    import env
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,14 +25,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = (
-    'django-insecure-f_e7%%_r5f=v$4s4gy%ww!5l7xcrj9di+s0o%#)psahhs=ft)o'
-)
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = 'DEVELOPMENT' in os.environ
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost']
+
+CSRF_TRUSTED_ORIGINS = [
+    'http://127.0.0.1:8000/',
+]
 
 # Required for `allauth` to work properly
 AUTHENTICATION_BACKENDS = [
@@ -55,6 +57,12 @@ INSTALLED_APPS = [
     'allauth.account',
     'products',  # Custom products app
     'cart',  # Custom shopping cart app
+    'checkout',  # Custom checkout app
+    'user_profiles',  # Custom user profiles app
+
+    # Additional apps
+    'crispy_forms',  # Crispy forms
+    'crispy_bootstrap4',  # Bootstrap4 for styling forms
 ]
 
 # Login and logout redirect URLs post authentication to the home page
@@ -92,10 +100,20 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 # Used for media files
                 'django.template.context_processors.media',
+                # This context processor is for the cart contents
+                'cart.contexts.cart_contents',
+            ],
+            # These will give the whole site access to crispy forms
+            'builtins': [
+                'crispy_forms.templatetags.crispy_forms_tags',
+                'crispy_forms.templatetags.crispy_forms_field',
             ],
         },
     },
 ]
+
+# To store messages in the session for toasts
+MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 
 WSGI_APPLICATION = 'farm_fresh_v_2_0_project.wsgi.application'
 
@@ -183,7 +201,31 @@ MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+# Stripe
+FREE_DELIVERY_THRESHOLD = 30
+STANDARD_DELIVERY_PERCENTAGE = 15
+STRIPE_CURRENCY = 'chf'
+STRIPE_PUBLIC_KEY = os.getenv('STRIPE_PUBLIC_KEY', '')
+STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY', '')
+STRIPE_WH_SECRET = os.getenv('STRIPE_WH_SECRET', '')
+
+# Email functionality settings
+if 'DEVELOPMENT' in os.environ:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+    DEFAULT_FROM_EMAIL = 'farmfresh@feedback.com'
+else:
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    EMAIL_USE_TLS = True
+    EMAIL_PORT = 587
+    EMAIL_HOST = 'smtp.gmail.com'
+    EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+    EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASS')
+    DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_HOST_USER')
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Crispy Forms settings
+CRISPY_TEMPLATE_PACK = 'bootstrap4'

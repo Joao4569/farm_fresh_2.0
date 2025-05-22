@@ -56,7 +56,7 @@
 
       {% endif %}
 
-      <a href="#" class="dropdown-item"
+      <a href="{% url 'profile' %}" class="dropdown-item"
         aria-label="User profile link">
       My Profile
       </a>
@@ -81,7 +81,7 @@
 <li class="list-inline-item">
   <a
     class="{% if grand_total %}text-primary font-weight-bold{% else %}text-black{% endif %} nav-link d-block d-lg-none"
-    href="#"
+    href="{% url 'view_cart' %}"
     aria-label="Link to shopping cart"
   >
     <div class="text-center">
