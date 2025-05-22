@@ -16,7 +16,7 @@ class Category(models.Model):
     name = models.CharField(max_length=254)
     friendly_name = models.CharField(max_length=254, null=True, blank=True)
 
-    def __str__(self):
+    def __str__(self):  # pylint: disable=invalid-str-returned
         """This string model method will take the category object itself
         and return its name"""
 
@@ -46,7 +46,7 @@ class Product(models.Model):
     organic = models.BooleanField(default=False)
     in_season = models.BooleanField(default=False)
 
-    def __str__(self):
+    def __str__(self):  # pylint: disable=invalid-str-returned
         """This string model method will take the product itself and
         return its name"""
 
@@ -61,7 +61,7 @@ class Producer(models.Model):
     description = models.TextField()
     image = models.ImageField(null=True, blank=True)
 
-    def __str__(self):
+    def __str__(self):  # pylint: disable=invalid-str-returned
         """This string model method will take the producer itself and
         return its name"""
 
@@ -138,7 +138,7 @@ class Packaging(models.Model):
         choices=WEIGHT_CHOICES,
     )
 
-    def __str__(self):
+    def __str__(self):  # pylint: disable=invalid-str-returned
         """This string model method will take the packaging object itself and
         return its name"""
 

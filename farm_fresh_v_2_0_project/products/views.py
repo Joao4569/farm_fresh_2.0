@@ -12,7 +12,7 @@ from .forms import ProductForm
 def all_products(request):
     """ A view to show all products, including sorting and search queries """
 
-    products = Product.objects.all()
+    products = Product.objects.all()  # pylint: disable=no-member
     query = None
     categories = None
     sort = None
@@ -38,18 +38,18 @@ def all_products(request):
             products = products.order_by(sortkey)
 
         if 'category' in request.GET:
-            """ This will convert a list of strings consisting of category
-            names passed through the URL into a list of actual category
-            objects, so that we can access all their fields in the template """
+            # This will convert a list of strings consisting of category
+            # names passed through the URL into a list of actual category
+            # objects, so that we can access all their fields in the template
 
             categories = request.GET['category'].split(',')
             products = products.filter(category__name__in=categories)
-            categories = Category.objects.filter(name__in=categories)
+            categories = Category.objects.filter(name__in=categories)  # pylint: disable=no-member
 
         if 'q' in request.GET:
-            """ This is to check if q is in request.get then set it as the
-            query. If the query is blank then attach an error message to
-            the request and redirect the user back to the products url """
+            # This is to check if q is in request.get then set it as the
+            # query. If the query is blank then attach an error message to
+            # the request and redirect the user back to the products url
 
             query = request.GET['q']
             if not query:
