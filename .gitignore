@@ -9,8 +9,12 @@ __pycache__/
 .vscode/
 venv/
 <<<<<<< HEAD
+<<<<<<< HEAD
 farm_fresh_v_2_0_project/env.py
 =======
 env.py
 >>>>>>> cba2650 (chore: Add env.py to gitignore file.)
+=======
+farm_fresh_v_2_0_project/env.py
+>>>>>>> 085db06 (chore: Add env.py to gitignore file.)
 node_modules/
