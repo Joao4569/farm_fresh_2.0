@@ -8,5 +8,9 @@ __pycache__/
 *.sqlite3
 .vscode/
 venv/
+<<<<<<< HEAD
 farm_fresh_v_2_0_project/env.py
+=======
+env.py
+>>>>>>> cba2650 (chore: Add env.py to gitignore file.)
 node_modules/
