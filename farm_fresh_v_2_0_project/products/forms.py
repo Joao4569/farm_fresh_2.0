@@ -24,5 +24,5 @@ class ProductForm(forms.ModelForm):
         friendly_names = [(c.id, c.get_friendly_name()) for c in categories]
 
         self.fields['category'].choices = friendly_names
-        for field_name, field in self.fields.items():  # pylint: disable=unused-variable
+        for field_name, field in self.fields.items():  # pylint: disable=unused-variable  # noqa: E501
             field.widget.attrs['class'] = 'border-black rounded-0'

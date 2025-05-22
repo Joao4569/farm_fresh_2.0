@@ -44,7 +44,7 @@ def all_products(request):
 
             categories = request.GET['category'].split(',')
             products = products.filter(category__name__in=categories)
-            categories = Category.objects.filter(name__in=categories)  # pylint: disable=no-member
+            categories = Category.objects.filter(name__in=categories)  # pylint: disable=no-member  # noqa: E501
 
         if 'q' in request.GET:
             # This is to check if q is in request.get then set it as the
