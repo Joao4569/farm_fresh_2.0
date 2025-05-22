@@ -228,4 +228,5 @@ else:
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Crispy Forms settings
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
