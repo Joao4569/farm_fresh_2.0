@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+<!-- The main structure of this template is based on Boutique Ado and modified for Farm Fresh -->
+
+{% block content %}
+  <div class="container header-container">
+    <div class="row">
+      <div class="col"></div>
+    </div>
+  </div>
+  <div class="container h-100">
+    <div class="row h-100">
+      <div class="col-7 col-md-6 my-auto">
+        <h1 class="display-4 logo-font text-white">
+          Sorry the page you are looking for isn't available
+        </h1>
+        <div class="my-5">
+          <h4>
+            <a href="{% url 'products' %}" class="shop-now-button btn btn-lg btn-success rounded-0 py-3">
+              Return to Store
+            </a>
+          </h4>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

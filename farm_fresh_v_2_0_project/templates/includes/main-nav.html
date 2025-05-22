@@ -25,14 +25,14 @@
         All Products
       </a>
       <div class="dropdown-menu border-0" aria-labelledby="all-products-link">
-        <a href="#" class="dropdown-item" aria-label="Sort by price">
+        <a href="{% url 'products' %}?sort=price&direction=asc" class="dropdown-item" aria-label="Sort by price">
           By Price
         </a>
-        <a href="#" class="dropdown-item" aria-label="Sort by category">
+        <a href="{% url 'products' %}?sort=category&direction=asc" class="dropdown-item" aria-label="Sort by category">
           By Category
         </a>
         <a
-          href="#"
+          href="{% url 'products' %}"
           class="dropdown-item"
           aria-label="Sort by price"
           aria-label="View all products"
@@ -56,17 +56,17 @@
         Fruit &amp; Veg
       </a>
       <div class="dropdown-menu border-0" aria-labelledby="fruit-veg-link">
-        <a href="#" class="dropdown-item" aria-label="View fruit category">
+        <a href="{% url 'products' %}?category=fruit" class="dropdown-item" aria-label="View fruit category">
           Fruit
         </a>
-        <a href="#" class="dropdown-item" aria-label="View vegetables category">
+        <a href="{% url 'products' %}?category=veg" class="dropdown-item" aria-label="View vegetables category">
           Vegetables
         </a>
-        <a href="#" class="dropdown-item" aria-label="View mushrooms category">
+        <a href="{% url 'products' %}?category=mushrooms" class="dropdown-item" aria-label="View mushrooms category">
           Mushrooms
         </a>
         <a
-          href="#"
+          href="{% url 'products' %}?category=fruit,veg,mushrooms"
           class="dropdown-item"
           aria-label="View all fruit and vegetables"
         >
@@ -89,20 +89,20 @@
         Milk &amp; Eggs
       </a>
       <div class="dropdown-menu border-0" aria-labelledby="milk-eggs-link">
-        <a href="#" class="dropdown-item" aria-label="View milk category">
+        <a href="{% url 'products' %}?category=milk" class="dropdown-item" aria-label="View milk category">
           Milk
         </a>
-        <a href="#" class="dropdown-item" aria-label="View eggs category">
+        <a href="{% url 'products' %}?category=eggs" class="dropdown-item" aria-label="View eggs category">
           Eggs
         </a>
-        <a href="#" class="dropdown-item" aria-label="View butter category">
+        <a href="{% url 'products' %}?category=butter" class="dropdown-item" aria-label="View butter category">
           Butter
         </a>
-        <a href="#" class="dropdown-item" aria-label="View cheese category">
+        <a href="{% url 'products' %}?category=cheese" class="dropdown-item" aria-label="View cheese category">
           Cheese
         </a>
         <a
-          href="#"
+          href="{% url 'products' %}?category=milk,eggs,butter,cheese"
           class="dropdown-item"
           aria-label="View milk and eggs category"
         >
@@ -125,16 +125,16 @@
         Pantry
       </a>
       <div class="dropdown-menu border-0" aria-labelledby="pantry-link">
-        <a href="#" class="dropdown-item" aria-label="View broth category">
+        <a href="{% url 'products' %}?category=broth" class="dropdown-item" aria-label="View broth category">
           Broth
         </a>
-        <a href="#" class="dropdown-item" aria-label="View sauce category">
+        <a href="{% url 'products' %}?category=sauce" class="dropdown-item" aria-label="View sauce category">
           Sauce
         </a>
-        <a href="#" class="dropdown-item" aria-label="View jus category">
+        <a href="{% url 'products' %}?category=jus" class="dropdown-item" aria-label="View jus category">
           Jus
         </a>
-        <a href="#" class="dropdown-item" aria-label="View pantry category">
+        <a href="{% url 'products' %}?category=broth,sauce,jus" class="dropdown-item" aria-label="View pantry category">
           All Pantry
         </a>
       </div>
@@ -154,7 +154,7 @@
         Special Offers
       </a>
       <div class="dropdown-menu border-0" aria-labelledby="specials-link">
-        <a href="#" class="dropdown-item" aria-label="View all specials">
+        <a href="{% url 'products' %}?category=special_offers" class="dropdown-item" aria-label="View all specials">
           All Specials
         </a>
       </div>
