@@ -25,6 +25,8 @@ urlpatterns = [
     path('', include('farm_fresh_app.urls')),
     # Allauth URLs
     path('accounts/', include('allauth.urls')),
+    # Path to Products app URL's
+    path('products/', include('products.urls')),
 ]
 
 if settings.DEBUG:

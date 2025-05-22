@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'allauth',
     'allauth.account',
+    'products',  # Custom products app
 ]
 
 # Login and logout redirect URLs post authentication to the home page

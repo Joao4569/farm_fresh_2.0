@@ -1,0 +1,156 @@
+<!-- The main structure of this template is based on Boutique Ado and modified for Farm Fresh -->
+
+<!-- Template extending from base.html template -->
+{% extends "base.html" %}
+<!-- For loading static files -->
+{% load static %}
+
+{% block page_header %}
+<div class="container header-container">
+  <div class="row">
+    <div class="col"></div>
+  </div>
+</div>
+{% endblock %}
+
+<!-- This block contains the main content for this template. -->
+{% block content %}
+
+<!-- This is a full-page overlay in order to cover up the body's background image
+and give this page a white background. -->
+<div class="overlay"></div>
+
+<div class="container-fluid">
+  <div class="row">
+
+    <!-- product image container -->
+    <div class="col-12 col-md-6 col-lg-4 offset-lg-2">
+      <div class="image-container my-5">
+        {% if product.image %}
+          <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}{{ product.image }}" alt="{{ product.name }}">
+        {% else %}
+          <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}noimage.png" alt="{{ product.name }}">
+        {% endif %}
+      </div>
+    </div>
+
+    <!-- product information container -->
+    <div class="col-12 col-md-6 col-lg-4">
+      <div class="product-details-container mb-5 mt-md-5">
+        <p class="mb-0">{{ product.name }}</p>
+        <p class="lead mb-0 text-left font-weight-bold">CHF {{ product.price }}</p>
+        {% if product.category %}
+          <p class="small mt-1 mb-0">
+            <a class="text-muted" href="{% url 'products' %}?category={{ product.category.name }}">
+              <i class="fas fa-tag mr-1"></i>{{ product.category.friendly_name }}
+            </a>
+          </p>
+        {% endif %}
+        {% if product.organic %}
+          <small class="text-muted"><i class="fa-solid fa-seedling mr-1 text-green"></i><strong>Organic</strong></small>
+        {% else %}
+          <small class="text-muted text-orange">Non-Organic</small>
+        {% endif %}
+        {% if product.in_season %}
+          <small class="text-muted"><i class="fa-solid fa-leaf mr-1 text-green"></i><strong>In Season</strong></small>
+        {% else %}
+          <small class="text-muted text-orange">Not in Season</small>
+        {% endif %}
+
+        <!-- Product management links -->
+        {% if request.user.is_superuser %}
+          <small class="ml-3">
+            <a href="{% url 'edit_product' product.id %}">Edit</a> | 
+            <a class="text-danger" href="{% url 'delete_product' product.id %}">Delete</a>
+          </small>
+        {% endif %}
+
+        <p class="mt-3">{{ product.description }}</p>
+
+        <!-- From for adding products to the shopping cart -->
+        <form class="form" action="{% url 'add_to_cart' product.id %}" method="POST">
+          {% csrf_token %}
+          <div class="form-row">
+
+            <!-- User quantity input -->
+            <div class="col-12">
+              <p class="mt-3"><strong>Quantity:</strong></p>
+              <div class="form-group w-50">
+                <div class="input-group input-group-{{ product.id }}">
+                  <div class="input-group-prepend">
+                    <button class="decrement-qty btn btn-custom rounded-0 decrement-qty_{{ product.id }}" 
+                      data-item_id="{{ product.id }}">
+                      <span class="icon">
+                        <i class="fas fa-minus"></i>
+                      </span>
+                    </button>
+                  </div>
+                  <input class="form-control qty_input id_qty_{{ product.id }}" type="number"
+                    name="quantity" value="1" min="1" max="99" data-item_id="{{ product.id }}">
+                  <div class="input-group-append">
+                    <button class="increment-qty btn btn-custom rounded-0 increment-qty_{{ product.id }}"
+                      data-item_id="{{ product.id }}">
+                      <span class="icon">
+                        <i class="fas fa-plus"></i>
+                      </span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Submit and keep shopping buttons -->
+            <div class="col-12">
+              <a href="{% url 'products' %}" class="btn btn-custom rounded-0 mt-5">
+                <span class="icon">
+                  <i class="fas fa-chevron-left"></i>
+                </span>
+                <span class="text-uppercase">Keep Shopping</span>
+              </a>
+              <input type="submit" class="btn btn-custom rounded-0 text-uppercase mt-5" value="Add to Cart">
+            </div>
+
+            <!-- This hidden input field will redirect the user back to the current page on submission of form -->
+            <input type="hidden" name="redirect_url" value="{{ request.path }}">
+          </div>
+        </form>
+      </div>
+    </div>
+    
+      <div class="col-12 text-center">
+        <h2 class="logo-text mb-5">Produced by</h2>
+      </div>
+
+      <!-- producer information container -->
+      <div class="col-12 col-md-6 col-lg-4 offset-lg-2">
+        <div class="product-details-container mb-5 mt-md-5">
+          <p class="mb-0 lead font-weight-bold">{{ product.producer.name }}</p>
+          <p class="mt-3">{{ product.producer.description }}</p>
+        </div>
+      </div>
+
+      <!-- producer image container -->
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="image-container my-5">
+          {% if product.producer %}
+            <img class="img-thumbnail" src="{{ MEDIA_URL }}{{ product.producer.image }}" alt="{{ product.producer.name }}">
+          {% else %}
+            <img class="img-thumbnail" src="{{ MEDIA_URL }}noimage.png" alt="{{ product.producer.name }}">
+          {% endif %}
+        </div>
+      </div>
+
+  </div>
+</div>
+{% endblock %}
+
+<!-- Include custom js post loading -->
+{% block postloadjs %}
+
+<!-- Include the parent block -->
+{{ block.super }}
+
+<!-- Custom js to be included -->
+{% include 'products/includes/quantity_input_script.html' %}
+
+{% endblock %}
