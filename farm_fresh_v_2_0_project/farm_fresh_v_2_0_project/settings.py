@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'products',  # Custom products app
+    'cart',  # Custom shopping cart app
 ]
 
 # Login and logout redirect URLs post authentication to the home page

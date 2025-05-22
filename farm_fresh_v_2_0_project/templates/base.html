@@ -125,6 +125,24 @@
           </li>
 
           <!-- Link to shopping cart -->
+          <li class="list-inline-item">
+            <a class="{% if grand_total %}text-info font-weight-bold{% else %}text-black{% endif %} nav-link" href="{% url 'view_cart' %}"
+              aria-label="Link to shopping cart">
+              <div class="text-center">
+                <div><i class="fa-solid fa-cart-shopping text-green"></i></div>
+                <p class="my-0 text-green">
+
+                  <!-- To check if the user has selected anything to purchase and display the current total purchase price -->
+                  {% if grand_total %}
+                    <!-- Format the price to 2 decimal places -->
+                    CHF {{ grand_total|floatformat:2 }}
+                  {% else %}
+                    CHF 0.00
+                  {% endif %}
+                </p>
+              </div>
+            </a>
+          </li>
           
         </ul>
       </div>

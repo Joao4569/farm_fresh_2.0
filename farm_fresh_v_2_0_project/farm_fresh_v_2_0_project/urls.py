@@ -27,6 +27,8 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),
     # Path to Products app URL's
     path('products/', include('products.urls')),
+    # Path to Shopping cart app URL's
+    path('cart/', include('cart.urls')),
 ]
 
 if settings.DEBUG:
