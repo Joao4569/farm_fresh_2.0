@@ -22,9 +22,7 @@
       <div class="col text-center mt-3">
         <h2 class="logo-font">Products</h2>
         {% for c in current_categories %}
-          <a class="category-badge text-decoration-none" href="{% url 'products' %}?category={{ c.name }}">
-            <span class="p-2 mt-2 badge badge-white text-black rounded-0 border border-dark">{{ c.friendly_name }}</span>
-          </a>
+          <span class="p-2 mt-2 logo-font text-green font-weight-bold">{{ c.friendly_name }}</span>
         {% endfor %}
         <hr class="w-50 mb-1">
       </div>
@@ -59,7 +57,7 @@
         <!-- For each product, a column will be generated, inside which will be a bootstrap card. Products will stack
         on mobile, be side-by-side on small and medium screens, split into three columns on large and four columns
         on extra large screens. -->
-        <div class="row">
+        <div class="row mb-5">
         {% for product in products %}
           <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
             <div class="card h-100 border-0">
