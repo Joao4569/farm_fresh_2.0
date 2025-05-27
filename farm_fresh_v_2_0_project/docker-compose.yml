@@ -10,20 +10,20 @@ services:
       dockerfile: dockerfile # Specify the Dockerfile to use for building the image
 
     # Specify the image to use for the container
-    image: farm-fresh-image
+    image: farm-fresh-development-image
     # Specify the container name
-    container_name: farm-fresh-app-container
+    container_name: farm-fresh-development-app-container
     ports:
       - "8000:8000" # Map port 8000 on the host to port 8000 in the container
     volumes:
-      - .:/farm-fresh-app # Mount the current directory to /farm-fresh-app (taken from WORKDIR in the dockerfile) in the container
+      - .:/farm-fresh-development-app # Mount the current directory to /farm-fresh-app (taken from WORKDIR in the dockerfile) in the container
 
   # Define the service for the database
   db:
     # Use the official PostgreSQL image from Docker Hub
     image: postgres:17
     # Specify the container name
-    container_name: farm-fresh-postgres-db
+    container_name: farm-fresh-development-postgres-db
     # Specify the restart policy for the container
     restart: always # Restart the container if it stops
     # Set environment variables for the database
