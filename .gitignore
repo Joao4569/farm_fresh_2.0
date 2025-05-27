@@ -8,5 +8,5 @@ __pycache__/
 *.sqlite3
 .vscode/
 venv/
-farm_fresh_v_2_0_project/env.py/
+farm_fresh_v_2_0_project\env.py
 node_modules/
