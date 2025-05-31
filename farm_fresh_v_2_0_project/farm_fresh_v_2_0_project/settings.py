@@ -15,11 +15,13 @@ from pathlib import Path
 # DEPLOYMENT
 # import dj_database_url
 if os.path.isfile('env.py'):
-    import env
+    import env  # noqa: F401 pylint: disable=unused-import
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Get the environment variable for development mode
+DEVELOPMENT = os.getenv('DEVELOPMENT', 'False') == 'True'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
@@ -128,17 +130,31 @@ WSGI_APPLICATION = 'farm_fresh_v_2_0_project.wsgi.application'
 #     }
 # }
 
-# Development database settings
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'farm_fresh_db',
-        'USER': 'farm_fresh_user',
-        'PASSWORD': 'farm_fresh_password',
-        'HOST': 'db',
-        'PORT': '5432'
+
+if DEVELOPMENT:
+    # Development database settings
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'farm_fresh_db',
+            'USER': 'farm_fresh_user',
+            'PASSWORD': 'farm_fresh_password',
+            'HOST': 'db',
+            'PORT': '5432'
+        }
     }
-}
+else:
+    # Production database settings
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': os.environ.get('DATABASE_NAME'),
+            'USER': os.environ.get('DATABASE_USER'),
+            'PASSWORD': os.environ.get('DATABASE_PASSWORD'),
+            'HOST': os.environ.get('DATABASE_HOST'),
+            'PORT': '5432'
+        }
+    }
 
 
 # Password validation
