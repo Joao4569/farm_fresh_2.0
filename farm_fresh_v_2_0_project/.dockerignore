@@ -1,1 +1,3 @@
-dockerfile
+Dockerfile
+docker-compose.yml
+farm_fresh_v_2_0_project/development-environment-docker
