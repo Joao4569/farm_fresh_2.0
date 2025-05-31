@@ -66,6 +66,7 @@ INSTALLED_APPS = [
     # Additional apps
     'crispy_forms',  # Crispy forms
     'crispy_bootstrap4',  # Bootstrap4 for styling forms
+    'storages',  # For static files storage in production (AWS S3)
 ]
 
 # Login and logout redirect URLs post authentication to the home page
@@ -215,20 +216,38 @@ when you run `collectstatic` """
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
 # This is the location where static files will be served from in production.
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Specify the storage backend for static files (Whitenoise).
-STORAGES = {
-    "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
-    },
-}
+# STORAGES = {
+#     "staticfiles": {
+#         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+#     },
+# }
 
 # This will tell Django where all of our media files are located.
 
 MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# AWS S3 settings for static and media files in production
+if not DEVELOPMENT:
+    AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+    AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+
+    # Bucket Config
+    AWS_STORAGE_BUCKET_NAME = 'farm-fresh-jch'
+    AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+    AWS_S3_FILE_OVERWRITE = False
+
+    STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/static/'
+    MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/media/'
+
+    STORAGES = {
+        'default': {'BACKEND': 'custom_storages.MediaStorage'},
+        'staticfiles': {'BACKEND': 'custom_storages.StaticStorage'},
+    }
 
 # Stripe
 FREE_DELIVERY_THRESHOLD = 30
