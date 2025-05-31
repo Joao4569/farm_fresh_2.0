@@ -206,13 +206,6 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
-
-STORAGES = {
-    "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
-    },
-}
-
 """This will tell Django where all of our static files are located."""
 
 STATIC_URL = 'static/'
@@ -222,14 +215,14 @@ when you run `collectstatic` """
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
 # This is the location where static files will be served from in production.
-# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Specify the storage backend for static files (Whitenoise).
-# STORAGES = {
-#     "staticfiles": {
-#         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
-#     },
-# }
+STORAGES = {
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
 
 # This will tell Django where all of our media files are located.
 
