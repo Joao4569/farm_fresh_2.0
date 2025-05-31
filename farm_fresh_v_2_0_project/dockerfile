@@ -7,7 +7,7 @@ ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
 # Set the working directory in the container to /app
-WORKDIR /farm-fresh-development-app
+WORKDIR /farm-fresh-production-app
 
 # Copy the requirements file into the container at /app
 COPY requirements.txt .
@@ -20,6 +20,10 @@ RUN pip install -r requirements.txt
 
 # Copy the current directory contents into the container at /app
 COPY . .
+
+# Collect static files for the Django application
+# This command collects all static files from the Django app and places them in the STATIC_ROOT directory.
+RUN python manage.py collectstatic --noinput
 
 # Expose port 8000 for the application
 EXPOSE 8000
