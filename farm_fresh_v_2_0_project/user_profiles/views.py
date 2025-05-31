@@ -3,8 +3,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .models import UserProfile
 from .forms import UserProfileForm
-"""The main structure of this is based on Boutique Ado and
-modified for Farm Fresh"""
+"""This module handles user profile views, allowing users to view and update their profiles and order history."""
 
 from checkout.models import Order
 

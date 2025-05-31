@@ -6,7 +6,6 @@ from django.conf import settings
 
 from products.models import Product
 from user_profiles.models import UserProfile
-# taken directly from Boutique Ado and customised for Farm Fresh
 
 
 class Order(models.Model):

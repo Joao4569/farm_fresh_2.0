@@ -2,8 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-"""The main structure of this is based on Boutique Ado and
-modified for Farm Fresh"""
+"""This module defines the UserProfile model for storing user-specific
+information such as default delivery details and order history."""
 
 
 class UserProfile(models.Model):

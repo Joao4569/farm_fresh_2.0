@@ -14,7 +14,6 @@ from cart.contexts import cart_contents
 
 import stripe
 import json
-# taken directly from Boutique Ado and customised for Farm Fresh
 
 
 @require_POST

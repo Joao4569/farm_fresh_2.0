@@ -1,6 +1,5 @@
 from django.contrib import admin
 from .models import Order, OrderLineItem
-# taken directly from Boutique Ado and customised for Farm Fresh
 
 
 class OrderLineItemAdminInline(admin.TabularInline):
