@@ -21,7 +21,7 @@ if os.path.isfile('env.py'):
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Get the environment variable for development mode
-DEVELOPMENT = os.getenv('DEVELOPMENT', 'False') == 'True'
+DEVELOPMENT = os.getenv('DEVELOPMENT')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
@@ -30,13 +30,14 @@ DEVELOPMENT = os.getenv('DEVELOPMENT', 'False') == 'True'
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = 'DEVELOPMENT' in os.environ
+DEBUG = os.environ.get('DEBUG')
 
-ALLOWED_HOSTS = ['localhost']
+ALLOWED_HOSTS = ['localhost', '*']
 
-CSRF_TRUSTED_ORIGINS = [
-    'http://127.0.0.1:8000/',
-]
+# CSRF_TRUSTED_ORIGINS = [
+#     'http://127.0.0.1:8000/',
+#     'https://',
+# ]
 
 # Required for `allauth` to work properly
 AUTHENTICATION_BACKENDS = [
