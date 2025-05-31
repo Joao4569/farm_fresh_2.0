@@ -32,12 +32,12 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = ['localhost', '*']
+ALLOWED_HOSTS = ['localhost', 'farm-fresh-2-0.onrender.com']
 
-# CSRF_TRUSTED_ORIGINS = [
-#     'http://127.0.0.1:8000/',
-#     'https://',
-# ]
+CSRF_TRUSTED_ORIGINS = [
+    'http://127.0.0.1:8000',
+    'https://farm-fresh-2-0.onrender.com',
+]
 
 # Required for `allauth` to work properly
 AUTHENTICATION_BACKENDS = [
