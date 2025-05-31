@@ -73,6 +73,8 @@ LOGOUT_REDIRECT_URL = '/'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    # WhiteNoise middleware to serve static files in production
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -210,6 +212,16 @@ STATIC_URL = 'static/'
 """ This is the location where static files will be collected to
 when you run `collectstatic` """
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
+
+# This is the location where static files will be served from in production.
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# Specify the storage backend for static files (Whitenoise).
+STORAGES = {
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
 
 # This will tell Django where all of our media files are located.
 
