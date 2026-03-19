@@ -26,9 +26,17 @@ body {
   color: var(--color-charcoal);
   font-family: "Manrope", sans-serif;
   background:
-    radial-gradient(circle at top left, rgba(245, 241, 232, 0.16), transparent 28%),
+    radial-gradient(
+      ellipse 1400px 900px at 12% 10%,
+      rgba(245, 241, 232, 0.24) 0%,
+      rgba(245, 241, 232, 0.12) 32%,
+      rgba(245, 241, 232, 0.04) 52%,
+      transparent 72%
+    ),
+    linear-gradient(180deg, rgba(255, 251, 245, 0.05), rgba(24, 53, 44, 0.08)),
     url("/media/farmer_carrying_box_of_veg.jpg") no-repeat center center fixed;
-  background-size: cover;
+  background-repeat: no-repeat, no-repeat, no-repeat;
+  background-size: 100% 100%, 100% 100%, cover;
 }
 
 .icon {
