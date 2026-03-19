@@ -12,13 +12,14 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 import os
 from pathlib import Path
 
-# DEPLOYMENT
-# import dj_database_url
-if os.path.isfile('env.py'):
-    import env  # noqa: F401 pylint: disable=unused-import
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+# DEPLOYMENT
+# import dj_database_url
+ENV_FILE = BASE_DIR / 'env.py'
+if ENV_FILE.is_file():
+    import env  # noqa: F401 pylint: disable=unused-import
 
 # Get the environment variable for development mode
 DEVELOPMENT = os.getenv('DEVELOPMENT', 'False') == 'True'
@@ -136,6 +137,13 @@ WSGI_APPLICATION = 'farm_fresh_v_2_0_project.wsgi.application'
 
 
 if DEVELOPMENT:
+    # Use the Docker service hostname when running in a container and localhost
+    # when Django is started directly on the host machine.
+    development_db_host = (
+        os.getenv('DEV_DATABASE_HOST')
+        or ('db' if os.path.exists('/.dockerenv') else 'localhost')
+    )
+
     # Development database settings
     DATABASES = {
         'default': {
@@ -143,7 +151,7 @@ if DEVELOPMENT:
             'NAME': 'farm_fresh_db',
             'USER': 'farm_fresh_user',
             'PASSWORD': 'farm_fresh_password',
-            'HOST': 'db',
+            'HOST': development_db_host,
             'PORT': '5432'
         }
     }

@@ -33,16 +33,30 @@ In this release I will be doing the following:
 
 ### Development
 
-For development purposes, Docker is used to containerize the application, ensuring consistency across different environments. The `docker-compose.yml` file defines the services required for the application, including the app service. The app service uses a custom Docker image built from the `Dockerfile`. The following resources are utilized:
+For development purposes, Docker is used to containerize the application, ensuring consistency across different environments. The development setup now lives directly in the project root at `farm_fresh_v_2_0_project/`, so there is a single place to start the app and database together.
 
-- **Dockerfile**: Defines the base image, dependencies, and commands to set up the application environment.
-- **docker-compose.yml**: Simplifies the process of running the application by managing the container's configuration, such as port mapping and volume mounting.
+- **Dockerfile.dev**: Defines the local development image used for Django's development server.
+- **docker-compose.yml**: Starts both the Django app and the PostgreSQL database for local development.
+- **Dockerfile**: Remains the production-oriented image used for deployment.
 - **Volumes**: The current directory is mounted into the container to allow real-time updates during development.
 
-To start the application in a development environment with a new image, use the following command:
+To start the application in a development environment with a new image, run the following commands from the repository root:
 
 ```powershell
+cd .\farm_fresh_v_2_0_project
 docker compose up -d --build
+```
+
+To confirm both services are running:
+
+```powershell
+docker compose ps
+```
+
+To stop the local stack:
+
+```powershell
+docker compose down
 ```
 
 As a best practice I clear the cache whenever significant changes have been made by using the following command:
@@ -53,7 +67,7 @@ docker system prune
 
 ### Deployment
 
-For deployment, the Docker image is built and pushed to GitHub Packages. This image is then used by Render to host the application. The deployment process involves the following steps:
+For deployment, the production image is built from `farm_fresh_v_2_0_project/Dockerfile` and pushed to GitHub Packages. This image is then used by Render to host the application. The deployment process involves the following steps:
 
 1. **Build the Docker Image**: The Docker image is built locally using the `Dockerfile`.
 2. **Push to GitHub Packages**: The built image is pushed to GitHub Packages using a Personal Access Token (PAT) for authentication. This ensures secure read and write access for Render.
@@ -64,7 +78,8 @@ This process is currently manual, requiring the image to be rebuilt and pushed f
 To push the image to GitHub Packages, use the following commands:
 
 ```powershell
-docker build -t ghcr.io/joao4569/ocean-basket-app-image .
+cd .\farm_fresh_v_2_0_project
+docker build -f Dockerfile -t ghcr.io/joao4569/ocean-basket-app-image .
 docker push ghcr.io/joao4569/ocean-basket-app-image:latest
 ```
 

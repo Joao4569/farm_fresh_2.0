@@ -1,19 +1,32 @@
-# This names the project
 name: farm-fresh-v2-0-project
 
 services:
-  # Define the service for the application
   app:
-    # Build the image if it doesn't exist
     build:
-      context: . # Use the current directory as the build context
-      dockerfile: dockerfile # Specify the Dockerfile to use for building the image
-
-    # Specify the image to use for the container
-    image: farm-fresh-production-image
-    # Specify the container name
-    container_name: farm-fresh-production-app-container
+      context: .
+      dockerfile: Dockerfile.dev
+    image: farm-fresh-development-image
+    container_name: farm-fresh-development-app-container
+    command: python manage.py runserver 0.0.0.0:8000
+    depends_on:
+      - db
     ports:
-      - "8000:8000" # Map port 8000 on the host to port 8000 in the container
+      - "8000:8000"
     volumes:
-      - .:/farm-fresh-production-app # Mount the current directory to /farm-fresh-app (taken from WORKDIR in the dockerfile) in the container
+      - .:/farm-fresh-app
+
+  db:
+    image: postgres:17
+    container_name: farm-fresh-development-postgres-db
+    restart: always
+    environment:
+      POSTGRES_USER: farm_fresh_user
+      POSTGRES_PASSWORD: farm_fresh_password
+      POSTGRES_DB: farm_fresh_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+volumes:
+  postgres_data:
