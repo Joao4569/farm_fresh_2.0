@@ -5,8 +5,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.dev
-    image: farm-fresh-development-image
-    container_name: farm-fresh-development-app-container
     command: python manage.py runserver 0.0.0.0:8000
     depends_on:
       - db
@@ -17,7 +15,6 @@ services:
 
   db:
     image: postgres:17
-    container_name: farm-fresh-development-postgres-db
     restart: always
     environment:
       POSTGRES_USER: farm_fresh_user

@@ -47,6 +47,8 @@ cd .\farm_fresh_v_2_0_project
 docker compose up -d --build
 ```
 
+If you need to create a local environment file, use `env.example` as the template for `env.py`.
+
 To confirm both services are running:
 
 ```powershell
