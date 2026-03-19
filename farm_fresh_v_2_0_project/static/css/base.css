@@ -193,6 +193,12 @@ a.category-badge>span.badge:hover {
   font-weight: 700;
 }
 
+.site-header.scrolled .site-promo-banner {
+  background: rgba(24, 53, 44, 0.98);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 14px 32px rgba(19, 35, 29, 0.18);
+}
+
 .brand-kicker {
   color: var(--color-muted);
   font-size: 0.72rem;

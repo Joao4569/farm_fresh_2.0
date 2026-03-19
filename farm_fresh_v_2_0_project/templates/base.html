@@ -379,6 +379,24 @@
           });
         }
       </script>
+      <script type="text/javascript">
+        const syncHeaderScrollState = function () {
+          const header = document.querySelector(".site-header");
+
+          if (!header) {
+            return;
+          }
+
+          if (window.scrollY > 48) {
+            header.classList.add("scrolled");
+          } else {
+            header.classList.remove("scrolled");
+          }
+        };
+
+        syncHeaderScrollState();
+        window.addEventListener("scroll", syncHeaderScrollState, { passive: true });
+      </script>
     {% endblock %}
   </body>
 </html>
