@@ -1,12 +1,9 @@
-<!-- template extending from base.html template -->
 {% extends "base.html" %}
-
-<!-- For loading static files -->
 {% load static %}
 
-<!-- For additional css in the checkout template -->
 {% block extra_css %}
-  <link rel="stylesheet" href="{% static 'checkout/css/checkout.css' %}">
+  <link rel="stylesheet" href="{% static 'css/commerce.css' %}" />
+  <link rel="stylesheet" href="{% static 'checkout/css/checkout.css' %}" />
 {% endblock %}
 
 {% block page_header %}
@@ -17,212 +14,118 @@
   </div>
 {% endblock %}
 
-<!-- This block contains the main content for this template. -->
 {% block content %}
   <div class="overlay"></div>
-  <div class="container">
-    <div class="row">
-      <div class="col">
-        <hr>
-        <h2 class="logo-font mb-4">Thank You</h2>
-        <hr>
-        <p class="text-black">Your order information is below. A confirmation email will be sent to
-          <strong>{{ order.email }}</strong>.</p>
-      </div>
+
+  <section class="commerce-shell">
+    <div class="commerce-hero">
+      <p class="eyebrow-label mb-3">Order Confirmed</p>
+      <h1 class="commerce-title">Thank you for your order.</h1>
+      <p class="commerce-intro">
+        A confirmation email has been sent to <strong>{{ order.email }}</strong>.
+        Your order details are below for easy reference.
+      </p>
     </div>
 
-    <!-- Order information section -->
-    <div class="row">
-      <div class="col-12 col-lg-7">
-        <div class="order-confirmation-wrapper p-2 border">
-          <div class="row">
-            <div class="col">
-              <small class="text-muted">Order Info:</small>
-            </div>
+    <div class="confirmation-panel">
+      <div class="confirmation-group">
+        <p class="eyebrow-label mb-3">Order Info</p>
+        <div class="confirmation-row">
+          <span class="confirmation-label">Order number</span>
+          <span class="confirmation-value">{{ order.order_number }}</span>
+        </div>
+        <div class="confirmation-row">
+          <span class="confirmation-label">Order date</span>
+          <span class="confirmation-value">{{ order.date }}</span>
+        </div>
+      </div>
+
+      <div class="confirmation-group">
+        <p class="eyebrow-label mb-3">Items</p>
+        {% for item in order.lineitems.all %}
+          <div class="confirmation-row">
+            <span class="confirmation-value">
+              <strong>{{ item.product.name }}</strong>
+            </span>
+            <span class="confirmation-value">
+              {{ item.quantity }} @ CHF {{ item.product.price }} each
+            </span>
           </div>
+        {% endfor %}
+      </div>
 
-          <div class="row">
-            <div class="col-12 col-md-4">
-              <p class="mb-0 text-black fw-bold">Order Number</p>
-            </div>
-            <div class="col-12 col-md-8 text-md-end">
-              <p class="mb-0">{{ order.order_number }}</p>
-            </div>
+      <div class="confirmation-group">
+        <p class="eyebrow-label mb-3">Delivery</p>
+        <div class="confirmation-row">
+          <span class="confirmation-label">Full name</span>
+          <span class="confirmation-value">{{ order.full_name }}</span>
+        </div>
+        <div class="confirmation-row">
+          <span class="confirmation-label">Address 1</span>
+          <span class="confirmation-value">{{ order.street_address1 }}</span>
+        </div>
+        {% if order.street_address2 %}
+          <div class="confirmation-row">
+            <span class="confirmation-label">Address 2</span>
+            <span class="confirmation-value">{{ order.street_address2 }}</span>
           </div>
-
-          <div class="row">
-            <div class="col-12 col-md-4">
-              <p class="mb-0 text-black fw-bold">Order Date</p>
-            </div>
-            <div class="col-12 col-md-8 text-md-end">
-              <p class="mb-0">{{ order.date }}</p>
-            </div>
+        {% endif %}
+        <div class="confirmation-row">
+          <span class="confirmation-label">Canton</span>
+          <span class="confirmation-value">{{ order.canton }}</span>
+        </div>
+        <div class="confirmation-row">
+          <span class="confirmation-label">Town or city</span>
+          <span class="confirmation-value">{{ order.town_or_city }}</span>
+        </div>
+        {% if order.postcode %}
+          <div class="confirmation-row">
+            <span class="confirmation-label">Postal code</span>
+            <span class="confirmation-value">{{ order.postcode }}</span>
           </div>
+        {% endif %}
+        <div class="confirmation-row">
+          <span class="confirmation-label">Country</span>
+          <span class="confirmation-value">{{ order.country }}</span>
+        </div>
+        <div class="confirmation-row">
+          <span class="confirmation-label">Phone number</span>
+          <span class="confirmation-value">{{ order.phone_number }}</span>
+        </div>
+      </div>
 
-          <!-- Order details section -->
-          <div class="row">
-            <div class="col">
-              <small class="text-muted">Order Details:</small>
-            </div>
-          </div>
-
-          {% for item in order.lineitems.all %}
-            <div class="row">
-              <div class="col-12 col-md-4">
-                <p class="small mb-0 text-black fw-bold">
-                  {{ item.product.name }}
-                </p>
-              </div>
-              <div class="col-12 col-md-8 text-md-end">
-                <p class="small mb-0">{{ item.quantity }} @ CHF {{ item.product.price }} each</p>
-              </div>
-            </div>
-          {% endfor %}
-
-          <!-- Delivery information section -->
-          <div class="row">
-            <div class="col">
-              <small class="text-muted">Delivering To:</small>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-12 col-md-4">
-              <p class="mb-0 text-black fw-bold">Full Name</p>
-            </div>
-            <div class="col-12 col-md-8 text-md-end">
-              <p class="mb-0">{{ order.full_name }}</p>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-12 col-md-4">
-              <p class="mb-0 text-black fw-bold">Address 1</p>
-            </div>
-            <div class="col-12 col-md-8 text-md-end">
-              <p class="mb-0">{{ order.street_address1 }}</p>
-            </div>
-          </div>
-
-          {% if order.street_address2 %}
-            <div class="row">
-              <div class="col-12 col-md-4">
-                <p class="mb-0 text-black fw-bold">Address 2</p>
-              </div>
-              <div class="col-12 col-md-8 text-md-end">
-                <p class="mb-0">{{ order.street_address1 }}</p>
-              </div>
-            </div>
-          {% endif %}
-
-          <div class="row">
-            <div class="col-12 col-md-4">
-              <p class="mb-0 text-black fw-bold">Canton</p>
-            </div>
-            <div class="col-12 col-md-8 text-md-end">
-              <p class="mb-0">{{ order.canton }}</p>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-12 col-md-4">
-              <p class="mb-0 text-black fw-bold">Town or City</p>
-            </div>
-            <div class="col-12 col-md-8 text-md-end">
-              <p class="mb-0">{{ order.town_or_city }}</p>
-            </div>
-          </div>
-
-          {% if order.postcode %}
-            <div class="row">
-              <div class="col-12 col-md-4">
-                <p class="mb-0 text-black fw-bold">Postal Code</p>
-              </div>
-              <div class="col-12 col-md-8 text-md-end">
-                <p class="mb-0">{{ order.postcode }}</p>
-              </div>
-            </div>
-          {% endif %}
-
-          <div class="row">
-            <div class="col-12 col-md-4">
-              <p class="mb-0 text-black fw-bold">Country</p>
-            </div>
-            <div class="col-12 col-md-8 text-md-end">
-              <p class="mb-0">{{ order.country }}</p>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-12 col-md-4">
-              <p class="mb-0 text-black fw-bold">Phone Number</p>
-            </div>
-            <div class="col-12 col-md-8 text-md-end">
-              <p class="mb-0">{{ order.phone_number }}</p>
-            </div>
-          </div>
-
-          <!-- Billing information section -->
-          <div class="row">
-            <div class="col">
-              <small class="text-muted">Billing Info:</small>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-12 col-md-4">
-              <p class="mb-0 text-black fw-bold">Order Total</p>
-            </div>
-            <div class="col-12 col-md-8 text-md-end">
-              <p class="mb-0">{{ order.order_total }}</p>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-12 col-md-4">
-              <p class="mb-0 text-black fw-bold">Delivery</p>
-            </div>
-            <div class="col-12 col-md-8 text-md-end">
-              <p class="mb-0">{{ order.delivery_cost }}</p>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-12 col-md-4">
-              <p class="mb-0 text-black fw-bold">Grand Total</p>
-            </div>
-            <div class="col-12 col-md-8 text-md-end">
-              <p class="mb-0">{{ order.grand_total }}</p>
-            </div>
-          </div>
+      <div class="confirmation-group">
+        <p class="eyebrow-label mb-3">Billing</p>
+        <div class="confirmation-row">
+          <span class="confirmation-label">Order total</span>
+          <span class="confirmation-value">CHF {{ order.order_total }}</span>
+        </div>
+        <div class="confirmation-row">
+          <span class="confirmation-label">Delivery</span>
+          <span class="confirmation-value">CHF {{ order.delivery_cost }}</span>
+        </div>
+        <div class="confirmation-row">
+          <span class="confirmation-label">Grand total</span>
+          <span class="confirmation-total">CHF {{ order.grand_total }}</span>
         </div>
       </div>
     </div>
 
-    <div class="row">
-      <div class="col-12 col-lg-7 text-end">
+    <div class="confirmation-cta-panel">
+      <div class="commerce-actions mt-0">
         {% if from_profile %}
-
-          <!-- Link to profile page if user is coming from the profile page -->
-          <a href="{% url 'profile' %}" class="btn btn-custom rounded-0 my-2">
-            <span class="icon me-2">
-              <i class="fas fa-angle-left"></i>
-            </span>
-            <span class="text-uppercase">Return to Profile</span>
+          <a href="{% url 'profile' %}" class="btn btn-secondary-soft px-4 py-3">
+            Return to profile
           </a>
-
         {% else %}
-
-          <!-- Link to special offers -->
-          <a href="{% url 'products' %}?category=special_offers" class="btn btn-custom rounded-0 my-2">
-            <span class="icon me-2">
-              <i class="fas fa-gifts"></i>
-            </span>
-            <span class="text-uppercase">Now check out our Specials!</span>
+          <a
+            href="{% url 'products' %}?category=special_offers"
+            class="btn btn-custom px-4 py-3"
+          >
+            Explore special offers
           </a>
-
         {% endif %}
       </div>
     </div>
-  </div>
+  </section>
 {% endblock %}

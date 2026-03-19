@@ -1,15 +1,10 @@
-<!-- template extending from base.html template -->
 {% extends "base.html" %}
-
-<!-- For loading static files -->
 {% load static %}
-
-<!-- For loading custom templatetag -->
 {% load cart_tools %}
 
-<!-- For additional css in the checkout template -->
 {% block extra_css %}
-  <link rel="stylesheet" href="{% static 'checkout/css/checkout.css' %}">
+  <link rel="stylesheet" href="{% static 'css/commerce.css' %}" />
+  <link rel="stylesheet" href="{% static 'checkout/css/checkout.css' %}" />
 {% endblock %}
 
 {% block page_header %}
@@ -20,165 +15,153 @@
   </div>
 {% endblock %}
 
-<!-- This block contains the main content for this template. -->
 {% block content %}
   <div class="overlay"></div>
-  <div class="container">
-    <div class="row">
-      <div class="col">
-        <hr>
-        <h2 class="logo-font mb-4">Checkout</h2>
-        <hr>
-      </div>
+
+  <section class="commerce-shell">
+    <div class="commerce-hero">
+      <p class="eyebrow-label mb-3">Checkout</p>
+      <h1 class="commerce-title">Complete your order.</h1>
+      <p class="commerce-intro">
+        Finish your Farm Fresh order with a simple delivery form and a clear
+        summary of everything in your basket.
+      </p>
     </div>
 
-    <div class="row">
-      <div class="col-12 col-lg-6 order-lg-last mb-5">
-        <p class="text-muted">Order Summary ({{ product_count }})</p>
+    <div class="row g-4 checkout-grid">
+      <div class="col-12 col-lg-5 order-lg-last">
+        <aside class="order-summary-panel">
+          <p class="eyebrow-label mb-3">Order Summary</p>
+          <h2 class="confirmation-card-title">Your selection ({{ product_count }})</h2>
+          <p class="order-summary-copy">
+            A quick review before payment is submitted.
+          </p>
 
-        <!-- Order summary information -->
-        <div class="row">
-          <div class="col-7 offset-2">
-            <p class="mb-1 mt-0 small text-muted">Item</p>
+          <div class="order-summary-list">
+            {% for item in cart_items %}
+              <div class="order-summary-item">
+                <div class="row g-3 align-items-center">
+                  <div class="col-3">
+                    <a href="{% url 'product_detail' item.product.id %}">
+                      {% if item.product.image %}
+                        <img
+                          class="order-summary-image"
+                          src="{{ MEDIA_URL }}{{ item.product.image }}"
+                          alt="{{ item.product.name }}"
+                        />
+                      {% else %}
+                        <img
+                          class="order-summary-image"
+                          src="{{ MEDIA_URL }}noimage.png"
+                          alt="{{ item.product.name }}"
+                        />
+                      {% endif %}
+                    </a>
+                  </div>
+                  <div class="col-6">
+                    <h3 class="order-summary-title h5">{{ item.product.name }}</h3>
+                    <p class="order-summary-meta mb-0">
+                      Qty: {{ item.quantity }}
+                    </p>
+                  </div>
+                  <div class="col-3 text-end">
+                    <p class="summary-line-value mb-0">
+                      CHF {{ item.product.price|calc_subtotal:item.quantity }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
           </div>
-          <div class="col-3 text-end">
-            <p class="mb-1 mt-0 small text-muted">Subtotal</p>
-          </div>
-        </div>
-        {% for item in cart_items %}
-          <div class="row">
-            <div class="col-2 mb-1">
 
-              <!-- Item image -->
-              <a href="{% url 'product_detail' item.product.id %}">
-                {% if item.product.image %}
-                  <img class="w-100" src="{{ MEDIA_URL }}{{ item.product.image }}" alt="{{ product.name }}">
+          <div class="summary-block">
+            <div class="summary-line">
+              <span class="summary-line-label">Order total</span>
+              <span class="summary-line-value">CHF {{ total|floatformat:2 }}</span>
+            </div>
+            <div class="summary-line">
+              <span class="summary-line-label">Delivery</span>
+              <span class="summary-line-value">CHF {{ delivery|floatformat:2 }}</span>
+            </div>
+            <div class="summary-line">
+              <span class="summary-line-label">Grand total</span>
+              <span class="summary-line-value">CHF {{ grand_total|floatformat:2 }}</span>
+            </div>
+          </div>
+        </aside>
+      </div>
+
+      <div class="col-12 col-lg-7">
+        <div class="checkout-panel">
+          <p class="eyebrow-label mb-3">Delivery Details</p>
+          <h2 class="confirmation-card-title">Where should we send it?</h2>
+          <p class="order-summary-copy">
+            Fill out the form below to place your order for Zurich delivery.
+          </p>
+
+          <form action="{% url 'checkout' %}" method="POST" id="payment-form">
+            {% csrf_token %}
+
+            <fieldset class="checkout-fieldset">
+              <legend class="checkout-legend">Contact</legend>
+              {{ order_form.full_name | as_crispy_field }}
+              {{ order_form.email | as_crispy_field }}
+            </fieldset>
+
+            <fieldset class="checkout-fieldset">
+              <legend class="checkout-legend">Delivery</legend>
+              {{ order_form.phone_number | as_crispy_field }}
+              {{ order_form.street_address1 | as_crispy_field }}
+              {{ order_form.street_address2 | as_crispy_field }}
+              {{ order_form.postcode | as_crispy_field }}
+
+              <div class="form-check mt-3">
+                {% if user.is_authenticated %}
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="id-save-info"
+                    name="save-info"
+                    checked
+                  />
+                  <label class="form-check-label" for="id-save-info">
+                    Save this delivery information to my profile
+                  </label>
                 {% else %}
-                  <img class="w-100" src="{{ MEDIA_URL }}noimage.png" alt="{{ product.name }}">
+                  <label class="form-check-label" for="id-save-info">
+                    <a href="{% url 'account_signup' %}">Create an account</a> or
+                    <a href="{% url 'account_login' %}">log in</a> to save this
+                    information for next time.
+                  </label>
                 {% endif %}
+              </div>
+            </fieldset>
+
+            <fieldset class="checkout-fieldset">
+              <legend class="checkout-legend">Payment</legend>
+              <div class="mb-3" id="card-element"></div>
+              <div class="mb-0 text-danger" id="card-errors" role="alert"></div>
+              <input type="hidden" value="{{ client_secret }}" name="client_secret" />
+            </fieldset>
+
+            <div class="commerce-actions">
+              <a href="{% url 'view_cart' %}" class="btn btn-secondary-soft px-4 py-3">
+                Adjust cart
               </a>
+              <button id="submit-button" class="btn btn-custom px-4 py-3">
+                Complete order
+              </button>
             </div>
 
-            <!-- Item details -->
-            <div class="col-7">
-              <p class="my-0"><strong>{{ item.product.name }}</strong></p>
-              {% if item.product.organic %}
-                <p class="my-0 small text-muted"><i class="fa-solid fa-seedling me-1 text-green"></i><strong>Organic</strong></p>
-              {% else %}
-                <p class="my-0 small text-muted text-orange">Non-Organic</p>
-              {% endif %}
-              {% if item.product.in_season %}
-                <p class="my-0 small text-muted"><i class="fa-solid fa-leaf me-1 text-green"></i><strong>In Season</strong></p>
-              {% else %}
-                <p class="my-0 small text-muted text-orange">Not in Season</p>
-              {% endif %}
-              <p class="my-0 small text-muted">Qty: {{ item.quantity }}</p>
-            </div>
-            <div class="col-3 text-end">
-              <p class="my-0 small text-muted">CHF {{ item.product.price | calc_subtotal:item.quantity }}</p>
-            </div>
-          </div>
-        {% endfor %}
-        <hr class="my-0">
-
-        <!-- Cost summary of order -->
-        <div class="row text-black text-end">
-          <div class="col-7 offset-2">
-            <p class="my-0">Order Total:</p>
-            <p class="my-0">Delivery:</p>
-            <p class="my-0">Grand Total:</p>
-          </div>
-          <div class="col-3">
-            <p class="my-0">CHF {{ total | floatformat:2 }}</p>
-            <p class="my-0">CHF {{ delivery | floatformat:2 }}</p>
-            <p class="my-0"><strong>CHF {{ grand_total | floatformat:2 }}</strong></p>
-          </div>
+            <p class="checkout-payment-note mb-0">
+              Your card will be charged <strong>CHF {{ grand_total|floatformat:2 }}</strong>.
+            </p>
+          </form>
         </div>
       </div>
-
-      <div class="col-12 col-lg-6">
-        <p class="text-muted">Please fill out the form below to complete your Farm Fresh order</p>
-
-        <!-- Customer information form for order -->
-        <form action="{% url 'checkout' %}" method="POST" id="payment-form">
-          {% csrf_token %}
-
-          <!-- Customer name and email fieldset -->
-          <fieldset class="rounded px-3 mb-5">
-            <legend class="fieldset-label small text-black px-2 w-auto">Details</legend>
-            {{ order_form.full_name | as_crispy_field }}
-            {{ order_form.email | as_crispy_field }}
-          </fieldset>
-
-          <!-- Customer contact and delivery information -->
-          <fieldset class="rounded px-3 mb-5">
-            <legend class="fieldset-label small text-black px-2 w-auto">Delivery</legend>
-            {{ order_form.phone_number | as_crispy_field }}
-            {{ order_form.street_address1 | as_crispy_field }}
-            {{ order_form.street_address2 | as_crispy_field }}
-            {{ order_form.postcode | as_crispy_field }}
-            <div class="form-check form-check-inline float-end me-0">
-              {% if user.is_authenticated %}
-
-                <!-- Option to save information to user profile -->
-                <label class="form-check-label" for="id-save-info">Save this delivery information to my profile</label>
-                <input class="form-check-input ms-2 me-0" type="checkbox" id="id-save-info" name="save-info" checked>
-
-              {% else %}
-
-              <!-- Or Create a user account -->
-              <label class="form-check-label" for="id-save-info">
-                <a class="text-info" href="{% url 'account_signup' %}">Create an account</a> or
-                <a class="text-info" href="{% url 'account_login' %}">login</a> to save this information
-              </label>
-              {% endif %}
-            </div>
-          </fieldset>
-
-          <!-- For customer payment information -->
-          <fieldset class="px-3">
-            <legend class="fieldset-label small text-black px-2 w-auto">Payment</legend>
-
-            <!-- Stripe card element -->
-            <div class="mb-3" id="card-element"></div>
-
-            <!-- Used to display form errors -->
-            <div class="mb-3 text-danger" id="card-errors" role="alert"></div>
-
-            <!-- Pass the client secret to the view so we can get the payment intent id -->
-            <input type="hidden" value="{{ client_secret }}" name="client_secret">
-          </fieldset>
-
-          <!-- Usefull link back to shopping cart -->
-          <div class="submit-button text-end mt-5 mb-2">
-            <a href="{% url 'view_cart' %}" class="btn btn-custom rounded-0">
-              <span class="icon">
-                <i class="fas fa-chevron-left"></i>
-              </span>
-              <span class="fw-bold">Adjust Cart</span>
-            </a>
-
-            <!-- Form submit button -->
-            <button id="submit-button" class="btn btn-custom rounded-0">
-              <span class="fw-bold">Complete Order</span>
-              <span class="icon">
-                <i class="fas fa-lock"></i>
-              </span>
-            </button>
-
-            <!-- To alert useer that their card is about to be charged -->
-            <p class="small text-danger my-0">
-              <span class="icon">
-                <i class="fas fa-exclamation-circle"></i>
-              </span>
-              <span>Your card will be charged <strong>CHF {{ grand_total|floatformat:2 }}</strong></span>
-            </p>
-
-          </div>
-        </form>
-      </div>
     </div>
-  </div>
+  </section>
+
   <div id="loading-overlay">
     <h1 class="text-light logo-font loading-spinner">
       <span class="icon">
