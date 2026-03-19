@@ -718,6 +718,13 @@ input[name="q"]::placeholder {
     font-size: 0.72rem;
   }
 
+  .site-header.menu-open .site-promo-banner {
+    background: rgba(245, 241, 232, 0.98);
+    border: 1px solid rgba(24, 53, 44, 0.12);
+    color: var(--color-pine);
+    box-shadow: var(--shadow-soft);
+  }
+
   .mobile-utility-link {
     min-width: 76px;
     padding: 0.5rem 0.55rem;

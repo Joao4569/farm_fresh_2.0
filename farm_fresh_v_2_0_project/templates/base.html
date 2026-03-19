@@ -363,6 +363,20 @@
           new bootstrap.Toast(toastNode).show();
         });
       </script>
+      <script type="text/javascript">
+        const siteHeader = document.querySelector(".site-header");
+        const mainNav = document.getElementById("main-nav");
+
+        if (siteHeader && mainNav) {
+          mainNav.addEventListener("show.bs.collapse", function () {
+            siteHeader.classList.add("menu-open");
+          });
+
+          mainNav.addEventListener("hide.bs.collapse", function () {
+            siteHeader.classList.remove("menu-open");
+          });
+        }
+      </script>
     {% endblock %}
   </body>
 </html>
