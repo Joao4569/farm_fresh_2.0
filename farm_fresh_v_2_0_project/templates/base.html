@@ -229,7 +229,11 @@
             <span class="navbar-toggler-icon"></span>
           </button>
 
-          {% include 'includes/mobile-top-header.html' %}
+          <!-- Compact mobile actions aligned opposite the navbar toggler -->
+          <ul class="list-inline d-flex d-lg-none align-items-stretch mb-0 ms-auto mobile-utility-list">
+            {% include 'includes/mobile-top-header.html' %}
+          </ul>
+
           {% include 'includes/main-nav.html' %}
         </nav>
       </div>
