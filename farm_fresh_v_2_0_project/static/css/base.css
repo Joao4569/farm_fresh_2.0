@@ -615,8 +615,9 @@ input[name="q"]::placeholder {
 }
 
 .footer-meta {
-  max-width: 1380px;
-  margin: 1rem auto 0;
+  margin-top: 0.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(255, 247, 237, 0.12);
   color: rgba(255, 247, 237, 0.8);
   font-size: 0.9rem;
 }
