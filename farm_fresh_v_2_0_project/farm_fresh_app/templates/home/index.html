@@ -1,32 +1,35 @@
-<!-- template extending from base.html template -->
-{% extends "base.html" %}
-<!-- For loading static files -->
-{% load static %}
-
-{% block page_header %}
+{% extends "base.html" %} {% load static %} {% block page_header %}
 <div class="container header-container">
   <div class="row">
     <div class="col"></div>
   </div>
 </div>
-{% endblock %}
-
-<!-- This block contains the main content for this template. -->
-{% block content %}
-<div class="container h-100">
-  <div class="row h-100">
-    <div class="col-7 col-md-6 my-auto">
-      <h1 class="display-4 logo-font text-white slogan">
-        Fresh produce direct from the Farm
-      </h1>
-      <div class="my-5 shop-button-container">
-        <h4>
-          <a
-            href="{% url 'products' %}"
-            class="shop-now-button btn btn-lg btn-success rounded-0 text-uppercase py-3"
-            >Shop Now
-          </a>
-        </h4>
+{% endblock %} {% block content %}
+<!-- Homepage hero introducing the new premium market direction -->
+<div class="container h-100 mt-3">
+  <div class="row h-100 align-items-center">
+    <div class="col-12 col-lg-7 my-auto">
+      <div class="hero-panel">
+        <p class="hero-kicker mb-3">
+          Seasonal Swiss produce, styled for modern living
+        </p>
+        <h1 class="display-4 logo-font text-white slogan">
+          Elevate your everyday with nutritious, locally sourced Swiss produce.
+        </h1>
+        <p class="hero-copy mt-4 mb-0">
+          Thoughtfully sourced fruit, vegetables, dairy and pantry staples for
+          households across Zurich.
+        </p>
+        <div class="my-5 shop-button-container">
+          <h4>
+            <a
+              href="{% url 'products' %}"
+              class="shop-now-button btn btn-lg btn-custom text-uppercase py-3"
+            >
+              Shop the collection
+            </a>
+          </h4>
+        </div>
       </div>
     </div>
   </div>

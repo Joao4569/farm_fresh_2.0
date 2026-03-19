@@ -22,7 +22,7 @@
       <div class="col text-center mt-3">
         <h2 class="logo-font">Products</h2>
         {% for c in current_categories %}
-          <span class="p-2 mt-2 logo-font text-green font-weight-bold">{{ c.friendly_name }}</span>
+          <span class="p-2 mt-2 logo-font text-green fw-bold">{{ c.friendly_name }}</span>
         {% endfor %}
         <hr class="w-50 mb-1">
       </div>
@@ -32,7 +32,7 @@
         <div class="row mt-1 mb-2">
           <div class="col-12 col-md-6 my-auto order-md-last d-flex justify-content-center justify-content-md-end">
             <div class="sort-select-wrapper w-50">
-              <select id="sort-selector" class="custom-select custom-select-sm rounded-0 border border-{% if current_sorting != 'None_None' %}info{% else %}black{% endif %}">
+              <select id="sort-selector" class="form-select form-select-sm rounded-0 border border-{% if current_sorting != 'None_None' %}info{% else %}black{% endif %}">
                 <option value="reset" {% if current_sorting == 'None_None' %}selected{% endif %}>Sort by...</option>
                 <option value="price_asc" {% if current_sorting == 'price_asc' %}selected{% endif %}>Price (low to high)</option>
                 <option value="price_desc" {% if current_sorting == 'price_desc' %}selected{% endif %}>Price (high to low)</option>
@@ -45,7 +45,7 @@
           </div>
 
           <div class="col-12 col-md-6 order-md-first">
-            <p class="text-muted mt-3 text-center text-md-left">
+            <p class="text-muted mt-3 text-center text-md-start">
               {% if search_term or current_categories or current_sorting != 'None_None' %}
                 <span class="small"><a href="{% url 'products' %}">All Products</a> | </span>
               {% endif %}
@@ -79,31 +79,31 @@
               </div>
 
               <!-- Footer of card containing product attributes -->
-              <div class="card-footer bg-white pt-0 border-0 text-left">
+              <div class="card-footer bg-white pt-0 border-0 text-start">
                 <div class="row">
                   <div class="col">
-                    <p class="lead mb-0 text-left font-weight-bold">CHF {{ product.price }}</p>
+                    <p class="lead mb-0 text-start fw-bold">CHF {{ product.price }}</p>
                     {% if product.category %}
                       <p class="small mt-1 mb-0">
                         <a class="text-muted" href="{% url 'products' %}?category={{ product.category.name }}">
-                          <i class="fas fa-tag mr-1"></i>{{ product.category.friendly_name }}
+                          <i class="fas fa-tag me-1"></i>{{ product.category.friendly_name }}
                         </a>
                       </p>
                     {% endif %}
                     {% if product.organic %}
-                      <small class="text-muted"><i class="fa-solid fa-seedling mr-1 text-green"></i><strong>Organic</strong></small>
+                      <small class="text-muted"><i class="fa-solid fa-seedling me-1 text-green"></i><strong>Organic</strong></small>
                     {% else %}
                       <small class="text-muted text-orange">Non-Organic</small>
                     {% endif %}
                     {% if product.in_season %}
-                      <small class="text-muted"><i class="fa-solid fa-leaf mr-1 text-green"></i><strong>In Season</strong></small>
+                      <small class="text-muted"><i class="fa-solid fa-leaf me-1 text-green"></i><strong>In Season</strong></small>
                     {% else %}
                       <small class="text-muted text-orange">Not in Season</small>
                     {% endif %}
 
                     <!-- Product management links -->
                     {% if request.user.is_superuser %}
-                      <small class="ml-3">
+                      <small class="ms-3">
                         <a href="{% url 'edit_product' product.id %}">Edit</a> | 
                         <a class="text-danger" href="{% url 'delete_product' product.id %}">Delete</a>
                       </small>

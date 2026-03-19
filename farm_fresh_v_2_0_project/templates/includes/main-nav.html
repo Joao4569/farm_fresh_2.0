@@ -1,61 +1,35 @@
 <div class="collapse navbar-collapse" id="main-nav">
   <ul class="navbar-nav w-auto mx-auto">
+    <!-- Mobile-only direct link back to the homepage -->
     <li class="nav-item d-block d-md-none">
-      <a
-        class="logo-font font-weight-bold nav-link text-green mr-5"
-        href="{% url 'home' %}"
-        id="home-link"
-        aria-label="Link to home page"
-      >
+      <a class="logo-font fw-bold nav-link main-nav-link" href="{% url 'home' %}" id="home-link" aria-label="Link to home page">
         Home
       </a>
     </li>
 
-    <!-- all products navigation dropdown menu -->
+    <!-- Product discovery dropdowns grouped by shopping intent -->
     <li class="nav-item dropdown">
-      <a
-        class="logo-font font-weight-bold nav-link text-green mr-5"
-        href="#"
-        id="all-products-link"
-        data-toggle="dropdown"
-        aria-haspopup="true"
-        aria-expanded="false"
-        aria-label="Dropdown menu for products"
-      >
+      <a class="logo-font fw-bold nav-link main-nav-link dropdown-toggle" href="#" id="all-products-link" role="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Dropdown menu for products">
         All Products
       </a>
-      <div class="dropdown-menu border-0" aria-labelledby="all-products-link">
+      <div class="dropdown-menu border-0 nav-surface" aria-labelledby="all-products-link">
         <a href="{% url 'products' %}?sort=price&direction=asc" class="dropdown-item" aria-label="Sort by price">
           By Price
         </a>
         <a href="{% url 'products' %}?sort=category&direction=asc" class="dropdown-item" aria-label="Sort by category">
           By Category
         </a>
-        <a
-          href="{% url 'products' %}"
-          class="dropdown-item"
-          aria-label="Sort by price"
-          aria-label="View all products"
-        >
+        <a href="{% url 'products' %}" class="dropdown-item" aria-label="View all products">
           All Products
         </a>
       </div>
     </li>
 
-    <!-- fruit and veg navigation dropdown menu -->
     <li class="nav-item dropdown">
-      <a
-        class="logo-font font-weight-bold nav-link text-green mr-5"
-        href="#"
-        id="fruit-veg-link"
-        data-toggle="dropdown"
-        aria-haspopup="true"
-        aria-expanded="false"
-        aria-label="Fruit and vegetable dropdown menu"
-      >
+      <a class="logo-font fw-bold nav-link main-nav-link dropdown-toggle" href="#" id="fruit-veg-link" role="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Fruit and vegetable dropdown menu">
         Fruit &amp; Veg
       </a>
-      <div class="dropdown-menu border-0" aria-labelledby="fruit-veg-link">
+      <div class="dropdown-menu border-0 nav-surface" aria-labelledby="fruit-veg-link">
         <a href="{% url 'products' %}?category=fruit" class="dropdown-item" aria-label="View fruit category">
           Fruit
         </a>
@@ -65,30 +39,17 @@
         <a href="{% url 'products' %}?category=mushrooms" class="dropdown-item" aria-label="View mushrooms category">
           Mushrooms
         </a>
-        <a
-          href="{% url 'products' %}?category=fruit,veg,mushrooms"
-          class="dropdown-item"
-          aria-label="View all fruit and vegetables"
-        >
+        <a href="{% url 'products' %}?category=fruit,veg,mushrooms" class="dropdown-item" aria-label="View all fruit and vegetables">
           All Fruit &amp; Veg
         </a>
       </div>
     </li>
 
-    <!-- milk and eggs navigation dropdown menu -->
     <li class="nav-item dropdown">
-      <a
-        class="logo-font font-weight-bold nav-link text-green mr-5"
-        href="#"
-        id="milk-eggs-link"
-        data-toggle="dropdown"
-        aria-haspopup="true"
-        aria-expanded="false"
-        aria-label="Milk and eggs dropdown menu"
-      >
+      <a class="logo-font fw-bold nav-link main-nav-link dropdown-toggle" href="#" id="milk-eggs-link" role="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Milk and eggs dropdown menu">
         Milk &amp; Eggs
       </a>
-      <div class="dropdown-menu border-0" aria-labelledby="milk-eggs-link">
+      <div class="dropdown-menu border-0 nav-surface" aria-labelledby="milk-eggs-link">
         <a href="{% url 'products' %}?category=milk" class="dropdown-item" aria-label="View milk category">
           Milk
         </a>
@@ -101,30 +62,17 @@
         <a href="{% url 'products' %}?category=cheese" class="dropdown-item" aria-label="View cheese category">
           Cheese
         </a>
-        <a
-          href="{% url 'products' %}?category=milk,eggs,butter,cheese"
-          class="dropdown-item"
-          aria-label="View milk and eggs category"
-        >
+        <a href="{% url 'products' %}?category=milk,eggs,butter,cheese" class="dropdown-item" aria-label="View milk and eggs category">
           All Milk &amp; Eggs
         </a>
       </div>
     </li>
 
-    <!-- pantry navigation dropdown menu -->
     <li class="nav-item dropdown">
-      <a
-        class="logo-font font-weight-bold nav-link text-green mr-5"
-        href="#"
-        id="pantry-link"
-        data-toggle="dropdown"
-        aria-haspopup="true"
-        aria-expanded="false"
-        aria-label="View pantry dropdown menu"
-      >
+      <a class="logo-font fw-bold nav-link main-nav-link dropdown-toggle" href="#" id="pantry-link" role="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="View pantry dropdown menu">
         Pantry
       </a>
-      <div class="dropdown-menu border-0" aria-labelledby="pantry-link">
+      <div class="dropdown-menu border-0 nav-surface" aria-labelledby="pantry-link">
         <a href="{% url 'products' %}?category=broth" class="dropdown-item" aria-label="View broth category">
           Broth
         </a>
@@ -140,20 +88,12 @@
       </div>
     </li>
 
-    <!-- special offers navigation dropdown menu -->
+    <!-- Promotional category kept visually separate from staple shopping groups -->
     <li class="nav-item dropdown">
-      <a
-        class="logo-font font-weight-bold nav-link text-green"
-        href="#"
-        id="specials-link"
-        data-toggle="dropdown"
-        aria-haspopup="true"
-        aria-expanded="false"
-        aria-label="View special offers"
-      >
+      <a class="logo-font fw-bold nav-link main-nav-link dropdown-toggle" href="#" id="specials-link" role="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="View special offers">
         Special Offers
       </a>
-      <div class="dropdown-menu border-0" aria-labelledby="specials-link">
+      <div class="dropdown-menu border-0 nav-surface" aria-labelledby="specials-link">
         <a href="{% url 'products' %}?category=special_offers" class="dropdown-item" aria-label="View all specials">
           All Specials
         </a>

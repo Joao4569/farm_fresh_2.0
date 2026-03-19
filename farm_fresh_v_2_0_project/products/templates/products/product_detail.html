@@ -36,28 +36,28 @@ and give this page a white background. -->
     <div class="col-12 col-md-6 col-lg-4">
       <div class="product-details-container mb-5 mt-md-5">
         <p class="mb-0">{{ product.name }}</p>
-        <p class="lead mb-0 text-left font-weight-bold">CHF {{ product.price }}</p>
+        <p class="lead mb-0 text-start fw-bold">CHF {{ product.price }}</p>
         {% if product.category %}
           <p class="small mt-1 mb-0">
             <a class="text-muted" href="{% url 'products' %}?category={{ product.category.name }}">
-              <i class="fas fa-tag mr-1"></i>{{ product.category.friendly_name }}
+              <i class="fas fa-tag me-1"></i>{{ product.category.friendly_name }}
             </a>
           </p>
         {% endif %}
         {% if product.organic %}
-          <small class="text-muted"><i class="fa-solid fa-seedling mr-1 text-green"></i><strong>Organic</strong></small>
+          <small class="text-muted"><i class="fa-solid fa-seedling me-1 text-green"></i><strong>Organic</strong></small>
         {% else %}
           <small class="text-muted text-orange">Non-Organic</small>
         {% endif %}
         {% if product.in_season %}
-          <small class="text-muted"><i class="fa-solid fa-leaf mr-1 text-green"></i><strong>In Season</strong></small>
+          <small class="text-muted"><i class="fa-solid fa-leaf me-1 text-green"></i><strong>In Season</strong></small>
         {% else %}
           <small class="text-muted text-orange">Not in Season</small>
         {% endif %}
 
         <!-- Product management links -->
         {% if request.user.is_superuser %}
-          <small class="ml-3">
+          <small class="ms-3">
             <a href="{% url 'edit_product' product.id %}">Edit</a> | 
             <a class="text-danger" href="{% url 'delete_product' product.id %}">Delete</a>
           </small>
@@ -85,7 +85,7 @@ and give this page a white background. -->
                   </div>
                   <input class="form-control qty_input id_qty_{{ product.id }}" type="number"
                     name="quantity" value="1" min="1" max="99" data-item_id="{{ product.id }}">
-                  <div class="input-group-append">
+                  <div>
                     <button class="increment-qty btn btn-custom rounded-0 increment-qty_{{ product.id }}"
                       data-item_id="{{ product.id }}">
                       <span class="icon">
@@ -123,7 +123,7 @@ and give this page a white background. -->
       <!-- producer information container -->
       <div class="col-12 col-md-6 col-lg-4 offset-lg-2">
         <div class="product-details-container mb-5 mt-md-5">
-          <p class="mb-0 lead font-weight-bold">{{ product.producer.name }}</p>
+          <p class="mb-0 lead fw-bold">{{ product.producer.name }}</p>
           <p class="mt-3">{{ product.producer.description }}</p>
         </div>
       </div>
