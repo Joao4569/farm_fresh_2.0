@@ -1,0 +1,303 @@
+/* Shared form, profile, and account management styling */
+.form-shell {
+  padding: 0 1rem 4.5rem;
+}
+
+.form-hero,
+.form-panel,
+.profile-history-panel,
+.account-card {
+  background: linear-gradient(135deg, rgba(255, 251, 245, 0.96), rgba(245, 241, 232, 0.94));
+  border: 1px solid rgba(24, 53, 44, 0.09);
+  border-radius: 32px;
+  box-shadow: var(--shadow-soft);
+}
+
+.form-hero {
+  margin: 0 auto 1.75rem;
+  max-width: 1380px;
+  padding: 2rem;
+}
+
+.form-title {
+  color: var(--color-pine);
+  font-family: "Fraunces", serif;
+  font-size: clamp(2.2rem, 4vw, 3.4rem);
+  line-height: 1.04;
+  margin-bottom: 1rem;
+}
+
+.form-intro {
+  color: var(--color-muted);
+  line-height: 1.8;
+  margin: 0;
+  max-width: 42rem;
+}
+
+.form-grid,
+.profile-grid {
+  margin: 0 auto;
+  max-width: 1380px;
+}
+
+.form-panel,
+.profile-history-panel,
+.account-card {
+  padding: 1.6rem;
+}
+
+.form-panel .form-control,
+.form-panel select,
+.form-panel textarea,
+.account-card input,
+.account-card select,
+.account-card textarea,
+.account-card .form-control {
+  border: 1px solid rgba(24, 53, 44, 0.12);
+  border-radius: 18px;
+  box-shadow: none;
+  min-height: 52px;
+}
+
+.form-panel textarea,
+.account-card textarea {
+  min-height: 140px;
+}
+
+.form-panel label,
+.account-card label,
+.profile-history-panel th {
+  color: var(--color-muted);
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.form-panel .helptext,
+.account-card .helptext {
+  color: var(--color-muted);
+  display: block;
+  font-size: 0.88rem;
+  margin-top: 0.35rem;
+}
+
+.form-panel .btn,
+.account-card .btn,
+.profile-history-panel .btn {
+  border-radius: var(--radius-pill);
+}
+
+.form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  justify-content: flex-end;
+  margin-top: 1.25rem;
+}
+
+.profile-history-panel table {
+  margin: 0;
+}
+
+.profile-history-panel th {
+  border-bottom: 1px solid rgba(24, 53, 44, 0.08);
+  padding-bottom: 0.9rem;
+}
+
+.profile-history-panel td {
+  padding: 1rem 0.5rem 1rem 0;
+  vertical-align: top;
+}
+
+.profile-history-panel a {
+  text-decoration: none;
+}
+
+.profile-order-items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.profile-order-items li + li {
+  margin-top: 0.3rem;
+}
+
+.account-layout {
+  min-height: 100vh;
+  padding: 2rem 1rem;
+  position: relative;
+}
+
+.account-layout::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 1200px 780px at 12% 8%, rgba(245, 241, 232, 0.22), transparent 72%),
+    linear-gradient(180deg, rgba(255, 251, 245, 0.1), rgba(24, 53, 44, 0.08)),
+    url("/media/farmer_carrying_box_of_veg.jpg") no-repeat center center fixed;
+  background-size: 100% 100%, 100% 100%, cover;
+  z-index: -2;
+}
+
+.account-layout::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(245, 241, 232, 0.62);
+  z-index: -1;
+}
+
+.account-shell {
+  margin: 0 auto;
+  max-width: 1080px;
+}
+
+.account-header {
+  margin-bottom: 1.25rem;
+  text-align: center;
+}
+
+.account-kicker {
+  color: var(--color-muted);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.account-heading {
+  color: var(--color-pine);
+  font-family: "Fraunces", serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  margin: 0.5rem 0 0;
+}
+
+.account-copy {
+  color: var(--color-muted);
+  line-height: 1.75;
+  margin: 0.75rem auto 0;
+  max-width: 38rem;
+}
+
+.account-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  justify-content: center;
+  margin: 0 auto 1rem;
+  max-width: 920px;
+}
+
+.account-nav-link {
+  background: rgba(255, 255, 255, 0.76);
+  border: 1px solid rgba(24, 53, 44, 0.08);
+  border-radius: var(--radius-pill);
+  color: var(--color-forest);
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  padding: 0.75rem 1rem;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.account-nav-link:hover,
+.account-nav-link:focus {
+  color: var(--color-russet);
+  text-decoration: none;
+}
+
+.account-message-list {
+  list-style: none;
+  margin: 0 0 1rem;
+  padding: 0;
+}
+
+.account-message-item {
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(24, 53, 44, 0.08);
+  border-radius: 18px;
+  color: var(--color-charcoal);
+  padding: 0.85rem 1rem;
+}
+
+.account-card h1,
+.account-card h2,
+.account-card h3 {
+  color: var(--color-pine);
+  font-family: "Fraunces", serif;
+}
+
+.account-card p,
+.account-card li,
+.account-card dd,
+.account-card dt {
+  color: var(--color-charcoal);
+  line-height: 1.75;
+}
+
+.account-card form {
+  margin-top: 1.25rem;
+}
+
+.account-card ul {
+  padding-left: 1.1rem;
+}
+
+.account-card button,
+.account-card .btn,
+.account-card input[type="submit"] {
+  background: linear-gradient(135deg, var(--color-pine), var(--color-forest));
+  border: 1px solid transparent;
+  border-radius: var(--radius-pill);
+  color: #fff;
+  font-weight: 700;
+  min-height: 50px;
+  padding: 0.8rem 1.4rem;
+}
+
+.account-card button:hover,
+.account-card .btn:hover,
+.account-card input[type="submit"]:hover {
+  background: linear-gradient(135deg, var(--color-gold), #d8a145);
+  color: #fff;
+}
+
+.account-card a {
+  color: var(--color-forest);
+}
+
+.account-card a:hover {
+  color: var(--color-russet);
+}
+
+@media (max-width: 991px) {
+  .form-shell {
+    padding-left: 0.85rem;
+    padding-right: 0.85rem;
+  }
+}
+
+@media (max-width: 575px) {
+  .form-hero,
+  .form-panel,
+  .profile-history-panel,
+  .account-card {
+    border-radius: 24px;
+    padding: 1.2rem;
+  }
+
+  .form-actions {
+    justify-content: stretch;
+  }
+
+  .form-actions .btn,
+  .account-card button,
+  .account-card .btn,
+  .account-card input[type="submit"] {
+    width: 100%;
+  }
+}

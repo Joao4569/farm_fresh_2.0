@@ -4,6 +4,10 @@
 <!-- For loading static files -->
 {% load static %}
 
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'css/forms.css' %}" />
+{% endblock %}
+
 {% block page_header %}
   <div class="container header-container">
     <div class="row">
@@ -15,19 +19,20 @@
 <!-- This block contains the main content for this template. -->
 {% block content %}
   <div class="overlay"></div>
-  <div class="container">
-    <div class="row">
-      <div class="col-12 col-md-6">
-        <hr>
-        <h2 class="logo-font mb-4">Product Management</h2>
-        <h5 class="text-muted">Add a Product to Inventory</h5>
-        <hr>
-      </div>
+  <section class="form-shell">
+    <div class="form-hero">
+      <p class="eyebrow-label mb-3">Product Management</p>
+      <h1 class="form-title">Add a product.</h1>
+      <p class="form-intro">
+        Create a new inventory item with the same polished product language used
+        across the storefront.
+      </p>
     </div>
 
-    <div class="row">
-        <div class="col-12 col-md-6">
-          <form method="POST" action="{% url 'add_product' %}" class="form mb-2" enctype="multipart/form-data">
+    <div class="row form-grid">
+      <div class="col-12 col-lg-8">
+        <div class="form-panel">
+          <form method="POST" action="{% url 'add_product' %}" class="form" enctype="multipart/form-data">
             {% csrf_token %}
 
             {% for field in form %}
@@ -38,14 +43,15 @@
               {% endif %}
             {% endfor %}
 
-            <div class="text-end bottom-of-form">
-              <a class="btn btn-custom rounded-0" href="{% url 'products' %}">Cancel</a>
-               <button class="btn btn-custom rounded-0" type="submit">Add Product</button>
+            <div class="form-actions">
+              <a class="btn btn-secondary-soft px-4 py-3" href="{% url 'products' %}">Cancel</a>
+              <button class="btn btn-custom px-4 py-3" type="submit">Add product</button>
             </div>
           </form>
         </div>
+      </div>
     </div>
-  </div>
+  </section>
 {% endblock %}
 
 <!-- Postload JS for image field -->
