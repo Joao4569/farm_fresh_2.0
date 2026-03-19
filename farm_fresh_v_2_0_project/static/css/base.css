@@ -26,13 +26,11 @@ body {
   color: var(--color-charcoal);
   font-family: "Manrope", sans-serif;
   background:
-    radial-gradient(
-      ellipse 1400px 900px at 12% 10%,
+    radial-gradient(ellipse 1400px 900px at 12% 10%,
       rgba(245, 241, 232, 0.24) 0%,
       rgba(245, 241, 232, 0.12) 32%,
       rgba(245, 241, 232, 0.04) 52%,
-      transparent 72%
-    ),
+      transparent 72%),
     linear-gradient(180deg, rgba(255, 251, 245, 0.05), rgba(24, 53, 44, 0.08)),
     url("/media/farmer_carrying_box_of_veg.jpg") no-repeat center center fixed;
   background-repeat: no-repeat, no-repeat, no-repeat;
@@ -314,9 +312,18 @@ a.category-badge>span.badge:hover {
 }
 
 .mobile-utility-list .list-inline-item {
+  flex: 1 1 0;
   margin-right: 0;
   margin-bottom: 0;
   position: relative;
+}
+
+.mobile-panel-label {
+  color: var(--color-muted);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
 }
 
 .main-nav-link {
@@ -758,6 +765,15 @@ input[name="q"]::placeholder {
     padding: 0.85rem 1rem;
   }
 
+  .navbar-light .navbar-toggler {
+    align-items: center;
+    display: inline-flex;
+    height: 70px;
+    justify-content: center;
+    margin-top: 0.15rem;
+    width: 70px;
+  }
+
   .mobile-brand-link {
     display: flex;
   }
@@ -781,21 +797,62 @@ input[name="q"]::placeholder {
   }
 
   .mobile-utility-link {
-    min-width: 76px;
-    padding: 0.5rem 0.55rem;
+    align-items: center;
+    display: inline-flex;
+    justify-content: center;
+    min-width: 0;
+    min-height: 70px;
+    padding: 0.65rem 0.45rem;
+    width: 100%;
+  }
+
+  .mobile-utility-link .text-center {
+    width: 100%;
+  }
+
+  .mobile-utility-link .text-center div {
+    margin-bottom: 0.28rem;
+  }
+
+  .mobile-utility-link i {
+    font-size: 1rem;
+  }
+
+  .mobile-utility-link p {
+    font-size: 0.69rem;
+    font-weight: 800;
+    letter-spacing: 0.03em;
   }
 
   .mobile-search-panel {
-    border-radius: 18px;
-    left: auto;
-    right: 0;
-    width: min(22rem, calc(100vw - 2rem));
+    border-radius: 20px;
+    left: 50% !important;
+    right: auto !important;
+    transform: translateX(-50%);
+    width: 40vw;
+    min-width: 20rem;
+    max-width: 30rem;
   }
 
   #mobile-user-options+.dropdown-menu {
     left: auto;
     right: 0;
-    width: min(16rem, calc(100vw - 2rem));
+    width: min(16rem, calc(100vw - 1.7rem));
+  }
+
+  .mobile-search-panel,
+  .mobile-account-panel {
+    padding: 1rem !important;
+  }
+
+  .mobile-search-panel .utility-search .form-control,
+  .mobile-account-panel .dropdown-item {
+    min-height: 50px;
+  }
+
+  .mobile-account-panel .dropdown-item {
+    align-items: center;
+    display: flex;
   }
 
   .main-nav-link {
@@ -848,13 +905,32 @@ input[name="q"]::placeholder {
     font-size: 1.28rem;
   }
 
+  .navbar-light .navbar-toggler {
+    height: 62px;
+    padding: 0.6rem;
+    width: 62px;
+  }
+
   .mobile-utility-link {
-    min-width: 68px;
-    padding: 0.45rem 0.45rem;
+    min-height: 62px;
+    padding: 0.5rem 0.3rem;
   }
 
   .mobile-utility-link p {
-    font-size: 0.72rem;
+    font-size: 0.64rem;
+  }
+
+  .mobile-search-panel {
+    left: 5vw !important;
+    right: 5vw !important;
+    width: auto;
+  }
+
+  #mobile-user-options+.dropdown-menu {
+    left: auto !important;
+    right: 0.5rem !important;
+    transform: none;
+    width: min(14.5rem, calc(100vw - 1rem));
   }
 
   .btt-button {

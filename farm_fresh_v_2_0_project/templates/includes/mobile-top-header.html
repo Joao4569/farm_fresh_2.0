@@ -1,19 +1,39 @@
 <!-- Mobile search trigger and dropdown panel -->
 <li class="list-inline-item">
-  <a class="nav-link mobile-utility-link d-block d-lg-none dropdown-toggle" href="#" id="mobile-search-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Search button">
+  <a
+    class="nav-link mobile-utility-link d-block d-lg-none dropdown-toggle"
+    href="#"
+    id="mobile-search-toggle"
+    role="button"
+    data-bs-toggle="dropdown"
+    aria-expanded="false"
+    aria-label="Search button"
+  >
     <div class="text-center">
       <div><i class="fas fa-search fa-lg"></i></div>
       <p class="my-0">Search</p>
     </div>
   </a>
-  <div class="dropdown-menu border-0 w-100 p-3 my-0 nav-surface mobile-search-panel" aria-labelledby="mobile-search-toggle">
+  <div
+    class="dropdown-menu border-0 w-100 p-3 my-0 nav-surface mobile-search-panel"
+    aria-labelledby="mobile-search-toggle"
+  >
     <form class="form" method="GET" action="{% url 'products' %}">
       <div class="input-group w-100 utility-search">
-        <input class="form-control border-0" type="text" name="q" placeholder="Search our site">
-        <button class="btn btn-custom border-0" type="submit" aria-label="Search products">
-            <span class="icon">
-              <i class="fas fa-search"></i>
-            </span>
+        <input
+          class="form-control border-0"
+          type="text"
+          name="q"
+          placeholder="Search our market"
+        />
+        <button
+          class="btn btn-custom border-0"
+          type="submit"
+          aria-label="Search products"
+        >
+          <span class="icon">
+            <i class="fas fa-search"></i>
+          </span>
         </button>
       </div>
     </form>
@@ -22,43 +42,79 @@
 
 <!-- Mobile account menu mirrors the desktop account dropdown -->
 <li class="list-inline-item dropdown">
-  <a class="nav-link mobile-utility-link d-block d-lg-none dropdown-toggle" href="#" id="mobile-user-options" role="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Link to user account">
+  <a
+    class="nav-link mobile-utility-link d-block d-lg-none dropdown-toggle"
+    href="#"
+    id="mobile-user-options"
+    role="button"
+    data-bs-toggle="dropdown"
+    aria-expanded="false"
+    aria-label="Link to user account"
+  >
     <div class="text-center">
       <div><i class="fas fa-user fa-lg"></i></div>
       <p class="my-0">Account</p>
     </div>
   </a>
-  <div class="dropdown-menu border-0 nav-surface" aria-labelledby="mobile-user-options">
-    {% if request.user.is_authenticated %}
-      {% if request.user.is_superuser %}
-        <a href="{% url 'add_product' %}" class="dropdown-item" aria-label="Product management link">
-          Product Management
-        </a>
-      {% endif %}
-      <a href="{% url 'profile' %}" class="dropdown-item" aria-label="User profile link">
-        My Profile
-      </a>
-      <a href="{% url 'account_logout' %}" class="dropdown-item" aria-label="Log out link">
-        Logout
-      </a>
+  <div
+    class="dropdown-menu border-0 nav-surface mobile-account-panel"
+    aria-labelledby="mobile-user-options"
+  >
+    <p class="mobile-panel-label mb-3">Account</p>
+    {% if request.user.is_authenticated %} {% if request.user.is_superuser %}
+    <a
+      href="{% url 'add_product' %}"
+      class="dropdown-item"
+      aria-label="Product management link"
+    >
+      Product Management
+    </a>
+    {% endif %}
+    <a
+      href="{% url 'profile' %}"
+      class="dropdown-item"
+      aria-label="User profile link"
+    >
+      My Profile
+    </a>
+    <a
+      href="{% url 'account_logout' %}"
+      class="dropdown-item"
+      aria-label="Log out link"
+    >
+      Logout
+    </a>
     {% else %}
-      <a href="{% url 'account_signup' %}" class="dropdown-item" aria-label="Registration link">
-        Register
-      </a>
-      <a href="{% url 'account_login' %}" class="dropdown-item" aria-label="Link to log in">
-        Login
-      </a>
+    <a
+      href="{% url 'account_signup' %}"
+      class="dropdown-item"
+      aria-label="Registration link"
+    >
+      Register
+    </a>
+    <a
+      href="{% url 'account_login' %}"
+      class="dropdown-item"
+      aria-label="Link to log in"
+    >
+      Login
+    </a>
     {% endif %}
   </div>
 </li>
 
 <!-- Mobile cart shortcut with current order value -->
 <li class="list-inline-item">
-  <a class="nav-link mobile-utility-link d-block d-lg-none {% if grand_total %}has-items{% endif %}" href="{% url 'view_cart' %}" aria-label="Link to shopping cart">
+  <a
+    class="nav-link mobile-utility-link d-block d-lg-none {% if grand_total %}has-items{% endif %}"
+    href="{% url 'view_cart' %}"
+    aria-label="Link to shopping cart"
+  >
     <div class="text-center">
       <div><i class="fa-solid fa-cart-shopping"></i></div>
       <p class="my-0">
-        {% if grand_total %}CHF {{ grand_total|floatformat:2 }}{% else %}CHF 0.00{% endif %}
+        {% if grand_total %}CHF {{ grand_total|floatformat:2 }}{% else %}CHF
+        0.00{% endif %}
       </p>
     </div>
   </a>
