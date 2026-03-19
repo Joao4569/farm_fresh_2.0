@@ -25,4 +25,5 @@ class ProductForm(forms.ModelForm):
 
         self.fields['category'].choices = friendly_names
         for field_name, field in self.fields.items():  # pylint: disable=unused-variable  # noqa: E501
-            field.widget.attrs['class'] = 'border-black rounded-0'
+            existing_classes = field.widget.attrs.get('class', '')
+            field.widget.attrs['class'] = f'{existing_classes} form-control'.strip()

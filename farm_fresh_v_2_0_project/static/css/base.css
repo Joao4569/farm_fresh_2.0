@@ -112,6 +112,18 @@ a:hover {
   text-decoration: none;
 }
 
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+.btn:focus-visible,
+.nav-link:focus-visible,
+.dropdown-item:focus-visible {
+  outline: 3px solid rgba(200, 138, 43, 0.45);
+  outline-offset: 3px;
+}
+
 a.category-badge {
   color: var(--color-forest) !important;
 }
@@ -430,6 +442,26 @@ input[name="q"]::placeholder {
   letter-spacing: 0.03em;
 }
 
+.toast-cart-title {
+  color: var(--color-pine);
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.toast-summary-line {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.toast-delivery-note {
+  background: rgba(200, 138, 43, 0.18);
+  border-radius: 16px;
+  color: var(--color-charcoal);
+}
+
 .cart-notification-wrapper {
   height: 120px;
   overflow-x: hidden;
@@ -736,5 +768,16 @@ input[name="q"]::placeholder {
 
   .social-link-container {
     margin: 0.5rem 0 !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
   }
 }
