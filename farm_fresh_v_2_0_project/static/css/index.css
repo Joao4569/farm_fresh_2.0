@@ -1,0 +1,79 @@
+/* Homepage hero and CTA styling */
+.shop-now-button {
+  min-width: 260px;
+  border-radius: var(--radius-pill);
+  box-shadow: var(--shadow-card);
+  font-weight: 700;
+  font-size: clamp(0.92rem, 0.84rem + 0.35vw, 1rem);
+  letter-spacing: 0.08em;
+  line-height: 1.2;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.hero-panel {
+  /* Glassmorphism-style hero card used on the homepage */
+  max-width: 720px;
+  background: linear-gradient(135deg, rgba(18, 34, 29, 0.72), rgba(18, 34, 29, 0.46));
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 34px;
+  box-shadow: var(--shadow-soft);
+  backdrop-filter: blur(8px);
+  color: #fff;
+  padding: 2.75rem;
+}
+
+.home-hero-section {
+  padding-bottom: clamp(3rem, 8vh, 6rem);
+}
+
+.hero-kicker {
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+
+.hero-copy {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 1.02rem;
+  line-height: 1.8;
+  max-width: 36rem;
+}
+
+.slogan {
+  font-size: clamp(2.7rem, 6vw, 5rem);
+  line-height: 1.02;
+  letter-spacing: normal;
+  text-transform: none;
+}
+
+@media (max-width: 991px) {
+  .hero-panel {
+    padding: 2rem;
+  }
+}
+
+@media (max-width: 451px) {
+  .shop-now-button {
+    min-width: 196px;
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+    padding-left: 1.35rem;
+    padding-right: 1.35rem;
+  }
+}
+
+@media (max-width: 410px) {
+  .shop-now-button {
+    min-width: 180px;
+    font-size: 0.82rem;
+    letter-spacing: 0.03em;
+    padding: 0.7rem 1rem !important;
+  }
+
+  .shop-button-container {
+    margin-top: 0 !important;
+  }
+}

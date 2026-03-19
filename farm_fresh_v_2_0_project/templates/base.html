@@ -37,6 +37,7 @@
         crossorigin="anonymous"
       />
       <link rel="stylesheet" href="{% static 'css/base.css' %}" />
+      <link rel="stylesheet" href="{% static 'css/mobile-top-header.css' %}" />
     {% endblock %}
 
     {% block extra_css %}
@@ -306,20 +307,26 @@
         <div
           class="col-12 col-lg-4 text-center d-flex justify-content-center align-items-center"
         >
-          <a
-            href="https://www.swiss-farmers.ch/seasonal-calendar/seasonal-calendar-fruits/"
-            target="_blank"
-            rel="noopener"
-            aria-label="Visit Swiss seasonal fruit calendar page (opens in a new tab)"
-            class="footer-link"
-          >
-            Swiss Farmers seasonal fruit calendar
-          </a>
+          <div class="footer-feature">
+            <p class="footer-label mb-2">Seasonal Guide</p>
+            <a
+              href="https://www.swiss-farmers.ch/seasonal-calendar/seasonal-calendar-fruits/"
+              target="_blank"
+              rel="noopener"
+              aria-label="Visit Swiss seasonal fruit calendar page (opens in a new tab)"
+              class="footer-link footer-resource-link"
+            >
+              Swiss Farmers seasonal fruit calendar
+            </a>
+          </div>
         </div>
 
         <div
           class="col-12 col-lg-4 text-center d-flex justify-content-center align-items-center my-auto social-link-container"
         >
+          <div class="footer-feature">
+            <p class="footer-label mb-3">Follow Along</p>
+            <div class="footer-social-row">
           <a
             href="https://facebook.com"
             target="_blank"
@@ -347,6 +354,8 @@
           >
             <i class="fa-brands fa-x-twitter"></i>
           </a>
+            </div>
+          </div>
         </div>
 
         <div class="col-12">

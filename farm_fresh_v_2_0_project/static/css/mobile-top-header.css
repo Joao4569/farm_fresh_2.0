@@ -1,0 +1,224 @@
+/* Mobile header branding, utility controls, and dropdown panels */
+.mobile-brand-link {
+  align-items: center;
+  color: var(--color-pine) !important;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 0 0.35rem;
+  text-align: center;
+  width: 100%;
+}
+
+.mobile-brand-link .brand-kicker {
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+}
+
+.mobile-brand-link .brand-mark {
+  font-size: 1.45rem;
+}
+
+.mobile-utility-list {
+  gap: 0.4rem;
+  position: relative;
+  z-index: 40;
+}
+
+.mobile-utility-list .list-inline-item {
+  flex: 1 1 0;
+  margin-right: 0;
+  margin-bottom: 0;
+  position: relative;
+}
+
+.mobile-utility-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 120px;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.78);
+  color: var(--color-forest) !important;
+  padding: 0.7rem 1rem;
+  box-shadow: 0 10px 25px rgba(24, 53, 44, 0.08);
+}
+
+.mobile-utility-link:hover {
+  color: var(--color-russet) !important;
+  transform: translateY(-1px);
+}
+
+.mobile-utility-link.has-items {
+  background: rgba(200, 138, 43, 0.12);
+  border-color: rgba(200, 138, 43, 0.35);
+}
+
+.mobile-utility-link .text-center {
+  line-height: 1.1;
+}
+
+.mobile-utility-link .text-center div {
+  margin-bottom: 0.32rem;
+}
+
+.mobile-utility-link p {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.mobile-utility-link.dropdown-toggle::after {
+  display: none;
+}
+
+.mobile-panel-label {
+  color: var(--color-muted);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.mobile-utility-list .dropdown-menu {
+  margin-top: 0.65rem;
+}
+
+@media (max-width: 991px) {
+  .site-header {
+    padding: 0.85rem 0.85rem 0;
+  }
+
+  .site-nav-row {
+    margin-top: 0.75rem;
+  }
+
+  .nav-shell {
+    align-items: flex-start;
+    padding: 0.85rem 1rem;
+  }
+
+  .navbar-light .navbar-toggler {
+    align-items: center;
+    display: inline-flex;
+    height: 70px;
+    justify-content: center;
+    margin-top: 0.15rem;
+    width: 70px;
+  }
+
+  .mobile-brand-link {
+    display: flex;
+  }
+
+  .nav-shell .navbar-collapse {
+    flex-basis: 100%;
+    margin-top: 0.5rem;
+    width: 100%;
+  }
+
+  .site-header.menu-open .site-promo-banner {
+    background: rgba(245, 241, 232, 0.98);
+    border: 1px solid rgba(24, 53, 44, 0.12);
+    color: var(--color-pine);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .mobile-utility-link {
+    align-items: center;
+    display: inline-flex;
+    justify-content: center;
+    min-width: 0;
+    min-height: 70px;
+    padding: 0.65rem 0.45rem;
+    width: 100%;
+  }
+
+  .mobile-utility-link .text-center {
+    width: 100%;
+  }
+
+  .mobile-utility-link .text-center div {
+    margin-bottom: 0.28rem;
+  }
+
+  .mobile-utility-link i {
+    font-size: 1rem;
+  }
+
+  .mobile-utility-link p {
+    font-size: 0.69rem;
+    font-weight: 800;
+    letter-spacing: 0.03em;
+  }
+
+  .mobile-search-panel {
+    border-radius: 20px;
+    left: 50% !important;
+    right: auto !important;
+    transform: translateX(-50%);
+    width: 40vw;
+    min-width: 20rem;
+    max-width: 30rem;
+  }
+
+  #mobile-user-options + .dropdown-menu {
+    left: auto;
+    right: 0;
+    width: min(16rem, calc(100vw - 1.7rem));
+  }
+
+  .mobile-search-panel,
+  .mobile-account-panel {
+    padding: 1rem !important;
+  }
+
+  .mobile-search-panel .utility-search .form-control,
+  .mobile-account-panel .dropdown-item {
+    min-height: 50px;
+  }
+
+  .mobile-account-panel .dropdown-item {
+    align-items: center;
+    display: flex;
+  }
+}
+
+@media (max-width: 451px) {
+  .mobile-utility-list {
+    gap: 0.3rem;
+  }
+
+  .mobile-brand-link .brand-mark {
+    font-size: 1.28rem;
+  }
+
+  .navbar-light .navbar-toggler {
+    height: 62px;
+    padding: 0.6rem;
+    width: 62px;
+  }
+
+  .mobile-utility-link {
+    min-height: 62px;
+    padding: 0.5rem 0.3rem;
+  }
+
+  .mobile-utility-link p {
+    font-size: 0.64rem;
+  }
+
+  .mobile-search-panel {
+    left: 5vw !important;
+    right: 5vw !important;
+    width: auto;
+  }
+
+  #mobile-user-options + .dropdown-menu {
+    left: auto !important;
+    right: 0.5rem !important;
+    transform: none;
+    width: min(14.5rem, calc(100vw - 1rem));
+  }
+}
