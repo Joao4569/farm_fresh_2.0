@@ -287,6 +287,26 @@ a.category-badge>span.badge:hover {
   row-gap: 0.85rem;
 }
 
+.mobile-brand-link {
+  align-items: center;
+  color: var(--color-pine) !important;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 0 0.35rem;
+  text-align: center;
+  width: 100%;
+}
+
+.mobile-brand-link .brand-kicker {
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+}
+
+.mobile-brand-link .brand-mark {
+  font-size: 1.45rem;
+}
+
 .mobile-utility-list {
   gap: 0.4rem;
   position: relative;
@@ -369,7 +389,7 @@ a.category-badge>span.badge:hover {
 }
 
 .header-container {
-  padding-top: 230px;
+  padding-top: 252px;
 }
 
 .hero-panel {
@@ -722,7 +742,7 @@ input[name="q"]::placeholder {
 
 @media (max-width: 991px) {
   .header-container {
-    padding-top: 188px;
+    padding-top: 216px;
   }
 
   .site-header {
@@ -736,6 +756,10 @@ input[name="q"]::placeholder {
   .nav-shell {
     align-items: flex-start;
     padding: 0.85rem 1rem;
+  }
+
+  .mobile-brand-link {
+    display: flex;
   }
 
   .nav-shell .navbar-collapse {
@@ -800,7 +824,7 @@ input[name="q"]::placeholder {
 
 @media (max-width: 451px) {
   .header-container {
-    padding-top: 210px;
+    padding-top: 226px;
   }
 
   .social-links {
@@ -820,6 +844,10 @@ input[name="q"]::placeholder {
     gap: 0.3rem;
   }
 
+  .mobile-brand-link .brand-mark {
+    font-size: 1.28rem;
+  }
+
   .mobile-utility-link {
     min-width: 68px;
     padding: 0.45rem 0.45rem;
@@ -837,7 +865,7 @@ input[name="q"]::placeholder {
 
 @media (max-width: 410px) {
   .header-container {
-    padding-top: 232px;
+    padding-top: 244px;
   }
 
   footer {

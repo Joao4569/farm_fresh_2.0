@@ -217,6 +217,18 @@
       <!-- Primary navigation shell shared across all pages -->
       <div class="row site-nav-row">
         <nav class="navbar navbar-expand-lg navbar-light w-100 nav-shell">
+          <!-- Compact mobile logo shown above the toggler and utility actions -->
+          <a
+            href="{% url 'home' %}"
+            class="nav-link main-logo-link d-lg-none mobile-brand-link"
+            aria-label="Link to home page"
+          >
+            <p class="brand-kicker mb-1">Zurich's seasonal market</p>
+            <h2 class="logo-font brand-mark my-0">
+              <strong>Farm</strong> Fresh
+            </h2>
+          </a>
+
           <button
             class="navbar-toggler"
             type="button"
