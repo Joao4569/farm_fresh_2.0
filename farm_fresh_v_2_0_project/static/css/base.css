@@ -26,7 +26,6 @@ body {
   color: var(--color-charcoal);
   font-family: "Manrope", sans-serif;
   background:
-    linear-gradient(rgba(17, 28, 24, 0.5), rgba(17, 28, 24, 0.22)),
     radial-gradient(circle at top left, rgba(245, 241, 232, 0.16), transparent 28%),
     url("/media/farmer_carrying_box_of_veg.jpg") no-repeat center center fixed;
   background-size: cover;
@@ -126,7 +125,7 @@ a.category-badge {
   color: var(--color-forest) !important;
 }
 
-a.category-badge > span.badge:hover {
+a.category-badge>span.badge:hover {
   background: var(--color-forest) !important;
   color: #fff !important;
 }
@@ -588,7 +587,7 @@ input[name="q"]::placeholder {
   border-color: #dc3545;
 }
 
-.custom-checkbox .custom-control-input:checked ~ .custom-control-label::before {
+.custom-checkbox .custom-control-input:checked~.custom-control-label::before {
   background-color: #dc3545;
   border-color: #dc3545;
   border-radius: 0;
@@ -600,8 +599,19 @@ input[name="q"]::placeholder {
 
 .site-footer {
   /* Footer acts as the closing brand statement for the site */
+  position: relative;
   color: #f7f0e6;
   padding: 3.5rem 1.35rem 1.75rem;
+  isolation: isolate;
+}
+
+.site-footer::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(rgba(17, 28, 24, 0.5), rgba(17, 28, 24, 0.22));
+  z-index: -1;
+  pointer-events: none;
 }
 
 .footer {
@@ -740,7 +750,7 @@ input[name="q"]::placeholder {
     width: min(22rem, calc(100vw - 2rem));
   }
 
-  #mobile-user-options + .dropdown-menu {
+  #mobile-user-options+.dropdown-menu {
     left: auto;
     right: 0;
     width: min(16rem, calc(100vw - 2rem));
