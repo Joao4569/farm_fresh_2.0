@@ -28,6 +28,9 @@
   <body class="account-layout">
     <div class="account-shell">
       <header class="account-header">
+        <div class="mb-3">
+          <a href="{% url 'home' %}" class="account-nav-link">Return Home</a>
+        </div>
         <p class="account-kicker">Account</p>
         <h1 class="account-heading">
           {% block account_heading %}
