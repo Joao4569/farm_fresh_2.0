@@ -344,6 +344,7 @@ a.category-badge>span.badge:hover {
   position: fixed;
   bottom: 5rem;
   right: 10px;
+  z-index: 1050;
 }
 
 .btt-link,

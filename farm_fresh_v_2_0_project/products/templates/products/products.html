@@ -184,7 +184,7 @@
   </section>
 
   <div class="btt-button shadow-sm rounded-0 border border-black">
-    <a class="btt-link d-flex h-100">
+    <a class="btt-link d-flex h-100" href="#" aria-label="Back to top">
       <i class="fas fa-arrow-up text-orange mx-auto my-auto"></i>
     </a>
   </div>
@@ -194,8 +194,9 @@
   {{ block.super }}
 
   <script type="text/javascript">
-    $(".btt-link").click(function () {
-      window.scrollTo(0, 0);
+    $(".btt-link").click(function (e) {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: "smooth" });
     });
   </script>
 
