@@ -33,24 +33,37 @@
           <article class="cart-item-card">
             <div class="row g-4 align-items-center">
               <div class="col-12 col-md-3">
-                {% if item.product.image %}
-                  <img
-                    class="cart-item-image"
-                    src="{{ MEDIA_URL }}{{ item.product.image }}"
-                    alt="{{ item.product.name }}"
-                  />
-                {% else %}
-                  <img
-                    class="cart-item-image"
-                    src="{{ MEDIA_URL }}noimage.png"
-                    alt="{{ item.product.name }}"
-                  />
-                {% endif %}
+                <a
+                  href="{% url 'product_detail' item.product.id %}"
+                  class="product-card-image-link"
+                  aria-label="View details for {{ item.product.name }}"
+                >
+                  {% if item.product.image %}
+                    <img
+                      class="cart-item-image"
+                      src="{{ MEDIA_URL }}{{ item.product.image }}"
+                      alt="{{ item.product.name }}"
+                    />
+                  {% else %}
+                    <img
+                      class="cart-item-image"
+                      src="{{ MEDIA_URL }}noimage.png"
+                      alt="{{ item.product.name }}"
+                    />
+                  {% endif %}
+                </a>
               </div>
 
               <div class="col-12 col-md-5">
                 <p class="cart-item-label mb-2">Selected item</p>
-                <h2 class="cart-item-title">{{ item.product.name }}</h2>
+                <h2 class="cart-item-title">
+                  <a
+                    href="{% url 'product_detail' item.product.id %}"
+                    class="text-reset text-decoration-none"
+                  >
+                    {{ item.product.name }}
+                  </a>
+                </h2>
                 <div class="product-badges mb-3">
                   {% if item.product.organic %}
                     <span class="product-badge product-badge-fresh">Organic</span>
