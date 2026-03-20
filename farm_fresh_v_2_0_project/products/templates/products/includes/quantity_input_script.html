@@ -1,5 +1,23 @@
 <script type="text/javascript">
   (function () {
+    function updateSubtotal(itemId) {
+      const subtotalNode = document.getElementById(`product-subtotal-${itemId}`);
+      const qtyInput = document.querySelector(`.input-group-${itemId} input[name="quantity"]`);
+
+      if (!subtotalNode || !qtyInput) {
+        return;
+      }
+
+      const unitPrice = parseFloat(subtotalNode.dataset.unitPrice);
+      const quantity = parseInt(qtyInput.value, 10);
+
+      if (Number.isNaN(unitPrice) || Number.isNaN(quantity)) {
+        return;
+      }
+
+      subtotalNode.textContent = `CHF ${(unitPrice * quantity).toFixed(2)}`;
+    }
+
     function handleEnableDisable(itemId) {
       const qtyInputs = document.querySelectorAll(`.input-group-${itemId} input[name="quantity"]`);
 
@@ -24,9 +42,11 @@
       const itemId = input.dataset.itemId;
 
       handleEnableDisable(itemId);
+      updateSubtotal(itemId);
 
       input.addEventListener("change", function () {
         handleEnableDisable(itemId);
+        updateSubtotal(itemId);
       });
     });
 
@@ -49,6 +69,7 @@
         });
 
         handleEnableDisable(itemId);
+        updateSubtotal(itemId);
       });
     });
 
@@ -71,6 +92,7 @@
         });
 
         handleEnableDisable(itemId);
+        updateSubtotal(itemId);
       });
     });
   })();

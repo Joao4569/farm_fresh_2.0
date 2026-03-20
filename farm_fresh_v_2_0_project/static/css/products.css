@@ -355,6 +355,14 @@
   padding: 1.25rem;
 }
 
+.product-cta-meta {
+  align-items: end;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: space-between;
+}
+
 .qty-label {
   color: var(--color-pine);
   font-weight: 800;
@@ -376,6 +384,20 @@
   font-weight: 700;
   min-height: 48px;
   text-align: center;
+}
+
+.product-subtotal-card {
+  background: rgba(24, 53, 44, 0.06);
+  border: 1px solid rgba(24, 53, 44, 0.08);
+  border-radius: 20px;
+  min-width: 11rem;
+  padding: 0.9rem 1rem;
+}
+
+.product-subtotal-value {
+  color: var(--color-pine);
+  font-size: 1.25rem;
+  font-weight: 800;
 }
 
 .product-cta-actions {
@@ -473,6 +495,15 @@
 
   .product-cta-actions .btn,
   .product-card-link {
+    width: 100%;
+  }
+
+  .product-cta-meta {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .product-subtotal-card {
     width: 100%;
   }
 
