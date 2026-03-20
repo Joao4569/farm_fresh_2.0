@@ -353,6 +353,10 @@ a.category-badge>span.badge:hover {
   cursor: pointer;
 }
 
+.btt-link {
+  background-color: var(--color-oat)
+}
+
 input[name="q"]::placeholder {
   color: #8c968f;
 }
@@ -773,6 +777,7 @@ input[name="q"]::placeholder {
 }
 
 @media (prefers-reduced-motion: reduce) {
+
   *,
   *::before,
   *::after {
