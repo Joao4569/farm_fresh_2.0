@@ -106,8 +106,9 @@
 
                 <div class="input-group qty-cluster input-group-{{ product.id }}">
                   <button
+                    type="button"
                     class="decrement-qty btn btn-custom decrement-qty_{{ product.id }}"
-                    data-item_id="{{ product.id }}"
+                    data-item-id="{{ product.id }}"
                     aria-label="Decrease quantity"
                   >
                     <span class="icon">
@@ -122,11 +123,12 @@
                     value="1"
                     min="1"
                     max="99"
-                    data-item_id="{{ product.id }}"
+                    data-item-id="{{ product.id }}"
                   />
                   <button
+                    type="button"
                     class="increment-qty btn btn-custom increment-qty_{{ product.id }}"
-                    data-item_id="{{ product.id }}"
+                    data-item-id="{{ product.id }}"
                     aria-label="Increase quantity"
                   >
                     <span class="icon">

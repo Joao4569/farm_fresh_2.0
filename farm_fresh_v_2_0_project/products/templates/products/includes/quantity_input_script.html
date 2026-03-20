@@ -1,50 +1,77 @@
 <script type="text/javascript">
-
-    /* 
-    * Disable +/- buttons outside 1-99 range.
-    * If no size is passed to the function, the parameter will have a value of undefined by default,
-    * which prevents any errors 
-    */
+  (function () {
     function handleEnableDisable(itemId) {
-        var currentValue = parseInt($(`.id_qty_${itemId}`).val());
-        var minusDisabled = currentValue < 2;
-        var plusDisabled = currentValue > 98;
-        $(`.decrement-qty_${itemId}`).prop("disabled", minusDisabled);
-        $(`.increment-qty_${itemId}`).prop("disabled", plusDisabled);
+      const qtyInputs = document.querySelectorAll(`.input-group-${itemId} input[name="quantity"]`);
+
+      if (!qtyInputs.length) {
+        return;
+      }
+
+      const currentValue = parseInt(qtyInputs[0].value, 10);
+      const minusDisabled = currentValue < 2;
+      const plusDisabled = currentValue > 98;
+
+      document.querySelectorAll(`.decrement-qty_${itemId}`).forEach(function (button) {
+        button.disabled = minusDisabled;
+      });
+
+      document.querySelectorAll(`.increment-qty_${itemId}`).forEach(function (button) {
+        button.disabled = plusDisabled;
+      });
     }
 
-    // Ensure proper enabling/disabling of all inputs on page load
-    var allQtyInputs = $(".qty_input");
-    for (var i = 0; i < allQtyInputs.length; i++) {
-        var itemId = $(allQtyInputs[i]).data("item_id");
-        handleEnableDisable(itemId);
-    }
+    document.querySelectorAll(".qty_input").forEach(function (input) {
+      const itemId = input.dataset.itemId;
 
-    // Check enable/disable every time the input is changed
-    $(".qty_input").change(function () {
-        var itemId = $(this).data("item_id");
+      handleEnableDisable(itemId);
+
+      input.addEventListener("change", function () {
         handleEnableDisable(itemId);
+      });
     });
 
-    // Increment quantity
-    $(".increment-qty").click(function (e) {
+    document.querySelectorAll(".increment-qty").forEach(function (button) {
+      button.addEventListener("click", function (e) {
         e.preventDefault();
-        var itemId = $(this).data("item_id");
-        var closestInput = $(this).closest(".input-group").find(".qty_input")[0];
-        var allQuantityInputs = $(`.input-group-${itemId} input[name="quantity"]`);
-        var currentValue = parseInt($(closestInput).val());
-        $(allQuantityInputs).val(currentValue + 1);
+
+        const itemId = button.dataset.itemId;
+        const quantityInputs = document.querySelectorAll(`.input-group-${itemId} input[name="quantity"]`);
+
+        if (!quantityInputs.length) {
+          return;
+        }
+
+        const currentValue = parseInt(quantityInputs[0].value, 10);
+        const nextValue = Math.min(currentValue + 1, 99);
+
+        quantityInputs.forEach(function (input) {
+          input.value = nextValue;
+        });
+
         handleEnableDisable(itemId);
+      });
     });
 
-    // Decrement quantity
-    $(".decrement-qty").click(function (e) {
+    document.querySelectorAll(".decrement-qty").forEach(function (button) {
+      button.addEventListener("click", function (e) {
         e.preventDefault();
-        var itemId = $(this).data("item_id");
-        var closestInput = $(this).closest(".input-group").find(".qty_input")[0];
-        var allQuantityInputs = $(`.input-group-${itemId} input[name="quantity"]`);
-        var currentValue = parseInt($(closestInput).val());
-        $(allQuantityInputs).val(currentValue - 1);
+
+        const itemId = button.dataset.itemId;
+        const quantityInputs = document.querySelectorAll(`.input-group-${itemId} input[name="quantity"]`);
+
+        if (!quantityInputs.length) {
+          return;
+        }
+
+        const currentValue = parseInt(quantityInputs[0].value, 10);
+        const nextValue = Math.max(currentValue - 1, 1);
+
+        quantityInputs.forEach(function (input) {
+          input.value = nextValue;
+        });
+
         handleEnableDisable(itemId);
+      });
     });
+  })();
 </script>

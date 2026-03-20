@@ -78,8 +78,9 @@
                     <label class="qty-label" for="id_qty_{{ item.item_id }}">Quantity</label>
                     <div class="input-group cart-qty-cluster input-group-{{ item.item_id }}">
                       <button
+                        type="button"
                         class="decrement-qty btn btn-custom decrement-qty_{{ item.item_id }}"
-                        data-item_id="{{ item.item_id }}"
+                        data-item-id="{{ item.item_id }}"
                         aria-label="Decrease quantity"
                       >
                         <span class="icon">
@@ -94,11 +95,12 @@
                         value="{{ item.quantity }}"
                         min="1"
                         max="99"
-                        data-item_id="{{ item.item_id }}"
+                        data-item-id="{{ item.item_id }}"
                       />
                       <button
+                        type="button"
                         class="increment-qty btn btn-custom increment-qty_{{ item.item_id }}"
-                        data-item_id="{{ item.item_id }}"
+                        data-item-id="{{ item.item_id }}"
                         aria-label="Increase quantity"
                       >
                         <span class="icon">
@@ -113,15 +115,16 @@
                     <p class="cart-item-subtotal mb-3">
                       CHF {{ item.product.price|calc_subtotal:item.quantity }}
                     </p>
-                    <a class="update-link cart-link-action text-green" href="#">Update</a>
+                    <button type="button" class="update-link cart-link-action text-green btn btn-link p-0">Update</button>
                     <span class="mx-2 text-muted">/</span>
-                    <a
+                    <button
+                      type="button"
                       class="remove-item cart-link-action text-danger"
-                      href="#"
                       id="remove_{{ item.item_id }}"
+                      data-remove-url="{% url 'remove_from_cart' item.item_id %}"
                     >
                       Remove
-                    </a>
+                    </button>
                   </div>
                 </div>
               </div>
@@ -181,20 +184,37 @@
   {% include 'products/includes/quantity_input_script.html' %}
 
   <script type="text/javascript">
-    $(".update-link").click(function (e) {
-      e.preventDefault();
-      $(this).closest(".cart-item-actions").find(".update-form").submit();
+    document.querySelectorAll(".update-link").forEach(function (button) {
+      button.addEventListener("click", function (e) {
+        e.preventDefault();
+
+        const cartActions = button.closest(".cart-item-actions");
+        const updateForm = cartActions ? cartActions.querySelector(".update-form") : null;
+
+        if (updateForm) {
+          updateForm.submit();
+        }
+      });
     });
 
-    $(".remove-item").click(function (e) {
-      e.preventDefault();
-      var csrfToken = "{{ csrf_token }}";
-      var itemId = $(this).attr("id").split("remove_")[1];
-      var url = `/cart/remove/${itemId}/`;
-      var data = { csrfmiddlewaretoken: csrfToken };
+    document.querySelectorAll(".remove-item").forEach(function (button) {
+      button.addEventListener("click", function (e) {
+        e.preventDefault();
 
-      $.post(url, data).done(function () {
-        location.reload();
+        fetch(button.dataset.removeUrl, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+            "X-CSRFToken": "{{ csrf_token }}",
+          },
+          body: new URLSearchParams({
+            csrfmiddlewaretoken: "{{ csrf_token }}",
+          }),
+        }).then(function (response) {
+          if (response.ok) {
+            window.location.reload();
+          }
+        });
       });
     });
   </script>
