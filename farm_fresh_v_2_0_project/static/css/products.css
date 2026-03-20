@@ -1,6 +1,6 @@
 /* Product discovery pages: listing hero, editorial cards, and detail layout */
 .catalog-shell {
-  padding: 0 1rem 4.5rem;
+  padding: 1rem 1rem 4.5rem;
 }
 
 .catalog-hero,
@@ -409,6 +409,7 @@
 
 @media (max-width: 991px) {
   .catalog-shell {
+    padding-top: 2.4rem;
     padding-left: 0.85rem;
     padding-right: 0.85rem;
   }
@@ -428,7 +429,17 @@
   }
 }
 
+@media (max-width: 820px) and (min-width: 576px) {
+  .catalog-shell {
+    padding-top: 2.75rem;
+  }
+}
+
 @media (max-width: 575px) {
+  .catalog-shell {
+    padding-top: 1.5rem;
+  }
+
   .catalog-hero,
   .catalog-toolbar,
   .product-detail-shell,
