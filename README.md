@@ -12,6 +12,7 @@ Version 1.0 can be found in [this repository](https://github.com/Joao4569/farm_f
 
 - [Docker](#docker)
   - [Development](#development)
+  - [Local Stripe Webhooks](#local-stripe-webhooks)
   - [Deployment](#deployment)
 
 - [Access Control](#access-control)
@@ -66,6 +67,51 @@ As a best practice I clear the cache whenever significant changes have been made
 ```powershell
 docker system prune
 ```
+
+### Local Stripe Webhooks
+
+For local Stripe testing, keep the production webhook configured in the Stripe
+Dashboard for the deployed Render site and use the Stripe CLI to forward webhook
+events to your local Docker app.
+
+Start the local app first:
+
+```powershell
+cd .\farm_fresh_v_2_0_project
+docker compose up -d --build
+```
+
+This project also includes an optional `stripe-cli` Docker Compose service so
+the Stripe CLI stays local to the app instead of being installed globally on
+your machine.
+
+To authenticate the CLI in the container:
+
+```powershell
+cd .\farm_fresh_v_2_0_project
+docker compose run --rm stripe-cli login
+```
+
+Then start the webhook forwarding service:
+
+```powershell
+docker compose --profile stripe up stripe-cli
+```
+
+If you prefer to run the CLI outside Docker, authenticate the Stripe CLI and
+forward the webhook events used by this project to the local checkout webhook
+endpoint:
+
+```powershell
+stripe login
+stripe listen --events payment_intent.succeeded,payment_intent.payment_failed --forward-to localhost:8000/checkout/wh/
+```
+
+The Stripe CLI will output a temporary webhook signing secret that begins with
+`whsec_`. Use that value for `STRIPE_WH_SECRET` in your local `env.py`.
+
+This allows local development to receive Stripe webhook events without changing
+or interrupting the production webhook destination configured for Render.
 
 ### Deployment
 

@@ -36,6 +36,14 @@
     color: #1f241f;
 }
 
+#card-element {
+  padding: 0.85rem 0.95rem;
+}
+
+#card-element .StripeElement {
+  width: 100%;
+}
+
 #loading-overlay {
 	display: none;
 	position: fixed;

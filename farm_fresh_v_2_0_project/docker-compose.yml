@@ -25,5 +25,23 @@ services:
     ports:
       - "5432:5432"
 
+  stripe-cli:
+    image: stripe/stripe-cli:latest
+    profiles:
+      - stripe
+    depends_on:
+      - app
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - stripe_cli_config:/root/.config/stripe
+    command: >
+      listen
+      --events payment_intent.succeeded,payment_intent.payment_failed
+      --forward-to http://host.docker.internal:8000/checkout/wh/
+    stdin_open: true
+    tty: true
+
 volumes:
   postgres_data:
+  stripe_cli_config:
