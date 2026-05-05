@@ -155,6 +155,10 @@ if DEVELOPMENT:
             'PORT': '5432'
         }
     }
+    SECURE_SSL_REDIRECT = False
+    SESSION_COOKIE_SECURE = False
+    CSRF_COOKIE_SECURE = False
+
 else:
     # Production database settings
     DATABASES = {
@@ -167,6 +171,9 @@ else:
             'PORT': '5432'
         }
     }
+    SECURE_SSL_REDIRECT = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
 
 
 # Password validation
