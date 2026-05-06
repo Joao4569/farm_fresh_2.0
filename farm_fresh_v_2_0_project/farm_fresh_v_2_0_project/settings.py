@@ -23,6 +23,7 @@ if ENV_FILE.is_file():
 
 # Get the environment variable for development mode
 DEVELOPMENT = os.getenv('DEVELOPMENT', 'False') == 'True'
+USE_AWS = os.getenv('USE_AWS', 'False') == 'True'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
@@ -33,7 +34,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = ['localhost', 'farm-fresh-2-0.onrender.com']
+ALLOWED_HOSTS = ['localhost', 'farm-fresh-2-0.onrender.com', '127.0.0.1']
 
 CSRF_TRUSTED_ORIGINS = [
     'http://127.0.0.1:8000',
@@ -76,8 +77,6 @@ LOGOUT_REDIRECT_URL = '/'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    # WhiteNoise middleware to serve static files in production
-    "whitenoise.middleware.WhiteNoiseMiddleware",
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -87,6 +86,10 @@ MIDDLEWARE = [
     # Middleware required by `allauth`
     "allauth.account.middleware.AccountMiddleware",
 ]
+
+if not USE_AWS:
+    # WhiteNoise serves static files when they are kept inside the container.
+    MIDDLEWARE.insert(1, "whitenoise.middleware.WhiteNoiseMiddleware")
 
 ROOT_URLCONF = 'farm_fresh_v_2_0_project.urls'
 
@@ -171,6 +174,7 @@ else:
             'PORT': '5432'
         }
     }
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
     SECURE_SSL_REDIRECT = True
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
@@ -245,8 +249,8 @@ MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-# AWS S3 settings for static and media files in production
-if not DEVELOPMENT:
+# AWS S3 settings for static and media files
+if USE_AWS:
     AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
     AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
 

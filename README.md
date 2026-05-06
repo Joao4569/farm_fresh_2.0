@@ -14,6 +14,7 @@ Version 1.0 can be found in [this repository](https://github.com/Joao4569/farm_f
   - [Development](#development)
   - [Local Stripe Webhooks](#local-stripe-webhooks)
   - [Deployment](#deployment)
+  - [Production Environment](#production-environment)
 
 - [Access Control](#access-control)
   - [Super User](#super-user)
@@ -49,6 +50,14 @@ docker compose up -d --build
 ```
 
 If you need to create a local environment file, use `env.example` as the template for `env.py`.
+
+For local development:
+
+- `DEVELOPMENT=True`
+- `DEBUG=True`
+- `USE_AWS=False`
+- Django serves local static and media URLs
+- PostgreSQL runs in the local Docker `db` service
 
 To confirm both services are running:
 
@@ -115,7 +124,9 @@ or interrupting the production webhook destination configured for Render.
 
 ### Deployment
 
-For deployment, the production image is built from `farm_fresh_v_2_0_project/Dockerfile` and pushed to GitHub Packages. This image is then used by Render to host the application. The deployment process involves the following steps:
+For deployment, the production image is built from `farm_fresh_v_2_0_project/Dockerfile` and pushed to GitHub Packages. This image is then used by Render to host the application. The production container runs `collectstatic` at startup, which means the required production environment variables must already be present on Render before the service boots.
+
+The deployment process involves the following steps:
 
 1. **Build the Docker Image**: The Docker image is built locally using the `Dockerfile`.
 2. **Push to GitHub Packages**: The built image is pushed to GitHub Packages using a Personal Access Token (PAT) for authentication. This ensures secure read and write access for Render.
@@ -127,11 +138,46 @@ To push the image to GitHub Packages, use the following commands:
 
 ```powershell
 cd .\farm_fresh_v_2_0_project
-docker build -f Dockerfile -t ghcr.io/joao4569/ocean-basket-app-image .
-docker push ghcr.io/joao4569/ocean-basket-app-image:latest
+docker build -f Dockerfile -t ghcr.io/joao4569/farm-fresh-production-image:latest .
+docker push ghcr.io/joao4569/farm-fresh-production-image:latest
 ```
 
 Ensure that the Personal Access Token is configured in your Docker CLI for authentication with GitHub Packages.
+
+### Production Environment
+
+Production uses a separate configuration path from local development.
+
+For Render production:
+
+- `DEVELOPMENT=False`
+- `DEBUG=False`
+- `USE_AWS=True`
+- Django uses the production PostgreSQL database configured through Render environment variables
+- Static and media files are served from AWS S3
+- HTTPS security settings are enabled in Django
+
+The minimum environment variables that should be configured on Render are:
+
+- `SECRET_KEY`
+- `DEVELOPMENT=False`
+- `DEBUG=False`
+- `USE_AWS=True`
+- `DATABASE_NAME`
+- `DATABASE_USER`
+- `DATABASE_PASSWORD`
+- `DATABASE_HOST`
+- `AWS_ACCESS_KEY_ID`
+- `AWS_SECRET_ACCESS_KEY`
+- `EMAIL_HOST_USER`
+- `EMAIL_HOST_PASS`
+- `STRIPE_PUBLIC_KEY`
+- `STRIPE_SECRET_KEY`
+- `STRIPE_WH_SECRET`
+
+The production image binds to Render's injected `PORT` automatically. Static
+files are collected at container startup so the container can use the runtime
+environment variables supplied by Render.
 
 ## Access Control
 
